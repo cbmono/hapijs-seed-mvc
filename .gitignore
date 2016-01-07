@@ -1,0 +1,36 @@
+# --------------------
+# App Files
+# --------------------
+test/coverage/
+local.js
+
+# --------------------
+# Sqlite3
+# --------------------
+*.db
+
+# --------------------
+# OSX Files
+# --------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# --------------------
+# IntelliJ Files
+# --------------------
+*.ipr
+*.iws
+.idea/
+
+# --------------------
+# Node Files
+# --------------------
+.nodemonignore
+npm-debug.log
+node_modules/
+logs/

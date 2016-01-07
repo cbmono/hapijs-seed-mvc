@@ -1,0 +1,51 @@
+//
+// If you change this file to local.js,
+// it will be the last one to be loaded
+// and the values will overwrite all the others.
+//
+module.exports = {
+  //
+  // Database
+  // DB name is defined in default.js
+  //
+  database: {
+    //
+    // MySQL
+    //
+    // client: 'mysql',
+    // connection: {
+    //   host: 'localhost',
+    //   port: 3306,
+    //   user: 'root',
+    //   password: ''
+    // },
+
+    //
+    // Postgres
+    //
+    // client: 'pg',
+    // connection: {
+    //   host: 'localhost',
+    //   port: 5432,
+    //   user: 'root',
+    //   password: ''
+    // },
+
+    //
+    // SQLite3
+    //
+    // client: 'sqlite3',
+    // connection: {
+    //   filename: './my_SQLite3.db'
+    // }
+  }
+
+  //
+  // Logging
+  //
+  logging: {
+    console: {
+      level: 'debug'
+    }
+  }
+}

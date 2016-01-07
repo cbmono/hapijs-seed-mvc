@@ -1,0 +1,32 @@
+{
+    "maxerr"        : 50,
+
+    // Enforcing
+    "bitwise"       : true,     // true: Prohibit bitwise operators (&, |, ^, etc.)
+    "asi"           : true,     // true: Tolerate Automatic Semicolon Insertion (no semicolons)
+    "camelcase"     : false,    // true: Identifiers must be in camelCase
+    "curly"         : false,    // true: Require {} for every new block or scope
+    "eqeqeq"        : true,     // true: Require triple equals (===) for comparison
+    "undef"         : true,     // true: Require all non-global variables to be declared (prevents global leaks)
+    "unused"        : "vars",   // true: Require all defined variables be used
+    "strict"        : true,     // true: Requires all functions run in ES5 Strict Mode
+    "esnext"        : true,     // true: Allow ES.next (ES6) syntax (ex: `const`)
+    "eqnull"        : true,     // true: Allow `== null` and `!= null`
+
+    // Environments
+    "node"          : true,
+
+    // Custom Globals
+    "globals": {
+      "define"      : false,
+      "jasmine"     : false,
+      "describe"    : false,
+      "before"      : false,
+      "beforeEach"  : false,
+      "after"       : false,
+      "afterEach"   : false,
+      "it"          : false,
+      "inject"      : false,
+      "spyOn"       : false
+    }
+}

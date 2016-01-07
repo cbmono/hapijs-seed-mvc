@@ -2,8 +2,9 @@
   "name": "hapijs-mvc-seed-es6",
   "version": "1.0.0",
   "description": "Seed project for hapijs MVC + RDMS",
-  "author": "Claudio Bredfeldt",
+  "author": "Claudio Bredfeldt <claudio@cbmono.de>",
   "license": "MIT",
+  "main": "index.js",
   "repository": {
     "url": "https://github.com/cbmono/hapijs-mvc-seed-es6.git"
   },
@@ -11,6 +12,18 @@
     "test": "gulp test"
   },
   "dependencies": {
-    "hapi": "^12.0.0"
+    "config": "^1.17.1",
+    "good": "^6.4.0",
+    "good-console": "^5.2.0",
+    "good-file": "^5.1.1",
+    "hapi": "^12.0.0",
+    "inert": "^3.2.0",
+    "joi": "^7.1.0",
+    "lout": "^8.0.1",
+    "vision": "^4.0.1",
+    "winston": "^2.1.1"
+  },
+  "devDependencies": {
+    "blipp": "^2.3.0"
   }
 }
