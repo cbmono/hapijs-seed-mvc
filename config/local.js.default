@@ -21,6 +21,17 @@ module.exports = {
     // },
 
     //
+    // MariaDB
+    //
+    // client: 'mariadb',     // or mariasql
+    // connection: {
+    //   host: 'localhost',
+    //   port: 3306,
+    //   user: 'root',
+    //   password: ''
+    // },
+
+    //
     // Postgres
     //
     // client: 'pg',

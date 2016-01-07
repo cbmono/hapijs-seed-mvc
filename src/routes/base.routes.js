@@ -29,13 +29,13 @@ class BaseRoutes {
    * Constructor
    *
    * @param {function} controller
-   *    Callback method to handle the route
+   *        Callback method to handle the route
    * @param {string} endpoint [optional]
-   *    End-point for the specific route, ie: /users/{user_id}/addresses/
+   *        End-point for the specific route, ie: /users/{user_id}/addresses/
    */
-  constructor(controller, endpoint) {
+  constructor(controller, endpoint = '') {
     this.joi = joi
-    this.endpoint = endpoint || ''
+    this.endpoint = endpoint
     this.controller = controller
 
     if (!controller) {
