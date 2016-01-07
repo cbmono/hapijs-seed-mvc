@@ -12,7 +12,7 @@
 //     //
 //     database: {
 //       connection: {
-//         database: 'my-own-app'
+//         database: 'my-app-db'
 //       }
 //     }
 //   }
@@ -48,7 +48,7 @@ module.exports = {
   //
   database: {
     connection: {
-      database: 'change-me-database-name'
+      database: 'my-database-name'    // @changeme
     }
   },
 

@@ -25,7 +25,7 @@ module.exports = {
       },
       config: {
         path: 'logs/',
-        prefix: 'my-hapi-api'     // Change me
+        prefix: 'my-hapi-api'     // @changeme
       }
     }]
   },

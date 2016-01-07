@@ -6,7 +6,7 @@
 module.exports = {
   //
   // Database
-  // DB name is defined in default.js
+  // DB name is defined in: ./config/default.js
   //
   database: {
     //

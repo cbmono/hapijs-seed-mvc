@@ -27,7 +27,7 @@ const server = new Hapi.Server()
 server.connection(serverConfig)
 
 //
-// Register the plugins to hapijs
+// Register hapi plugins
 //
 for (let plugin in pluginsConfig) {
   server.register(
@@ -57,7 +57,7 @@ fs.readdirSync(routesNormalizedPath).forEach((file) => {
 ///////////////////////////////////////
 server.start(() => {
   logger.info('////////////////////////////////////////////////')
-  logger.info('Server running at:', server.info.uri)
-  logger.info('With NODE_ENV:', process.env.NODE_ENV || 'local')
+  logger.info('Server running at: ', server.info.uri)
+  logger.info('With NODE_ENV: ', process.env.NODE_ENV || 'local')
   logger.info('////////////////////////////////////////////////')
 })
