@@ -14,22 +14,24 @@ This project runs the latest version of hapi JS to help building RESTful applica
 - Unit / Integration tests ([Mocha]/[Chai])
 - Remote debugging
 - Logging
+- Healthcheck end-point
 - [Gulp]
 
 ## Getting started
 
-1. Duplicate `config/local.coffee.default` into `config/local.coffee` and enter your database settings (only necessary once)
+1. Duplicate `config/local.js.default` into `config/local.js` and enter your database settings (_only necessary once_)
 
-2. [Migrate the database](#database-migration-and-seed) (only necessary once)
+2. [Migrate the database](#database-migration-and-seed) (_only necessary once_)
 
 3. Install the dependencies and run the app
 ````
+$ npm install gulp -g
 $ npm install
-$ export NODE_ENV=staging # local | staging | production
+$ export NODE_ENV=local     # local | staging | production
 $ gulp
 ````
 
-If `NODE_ENV` wasn't defined, then `local` is used
+(if `NODE_ENV` wasn't set, then `local` is going to be used)
 
 4. Go to [http://localhost:3000](http://localhost:3000)
 
