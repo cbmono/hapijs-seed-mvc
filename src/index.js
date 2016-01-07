@@ -19,7 +19,6 @@ const serverConfig = config.get('server')
 const logger = require('./logger')
 const pluginsConfig = require('../config/plugins')
 
-
 //
 // Setup the server
 //
@@ -45,10 +44,11 @@ for (let plugin in pluginsConfig) {
 let routesNormalizedPath = path.join(__dirname, 'routes')
 
 fs.readdirSync(routesNormalizedPath).forEach((file) => {
-  if (file !== 'base.route.js') {
+  if (file !== 'base.routes.js') {
     server.route(require('./routes/' + file))
   }
 })
+
 
 ///////////////////////////////////////
 //

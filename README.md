@@ -1,10 +1,10 @@
-# [hapi] (MVC) Seed Project
+# [hapi] (MVC / RDMS) Seed Project
 
-This project runs the latest version of hapi JS to help building RESTful applications, featuring the following:
+This project runs the latest version of hapi JS to help building RESTful applications, featuring:
 
 - ES6
 - MVC file structure
-- RDMS (via [knex.js]), supporting:
+- RDMS (via [knex.js])
   - MySQL / MariaDB
   - postgreSQL
   - SQLite3
@@ -12,6 +12,7 @@ This project runs the latest version of hapi JS to help building RESTful applica
 - Support for many environments (_local_, _dev_, _staging_, _production_)
 - Auto-generated documentation ([lout])
 - Unit / Integration tests ([Mocha]/[Chai])
+- RESTful outputs
 - Remote debugging
 - Logging
 - Healthcheck end-point
