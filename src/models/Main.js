@@ -1,5 +1,3 @@
-'use strict'
-
 //
 // External dependencies
 //
@@ -8,7 +6,7 @@ const Q = require('q')
 //
 // Internal dependencies
 //
-const BaseModelRMDB = require('./BaseModel.RMDB')
+const BaseModelRDMS = require('./BaseModel.RDMS')
 
 
 /******************************************
@@ -16,11 +14,10 @@ const BaseModelRMDB = require('./BaseModel.RMDB')
  * Main
  *
  ******************************************/
-class Main extends BaseModelRMDB {
+class Main extends BaseModelRDMS {
 
   constructor() {
-    let tableName = 'EMPTY'
-    super(tableName)
+    super('EMPTY')
   }
 
   /**
@@ -29,6 +26,7 @@ class Main extends BaseModelRMDB {
    * @return {promise}
    */
   doHealthcheck(mono = 'mono') {
+    let that = this
     let deferred = Q.defer()
     let response = {
       ping: 'pong',
@@ -37,12 +35,13 @@ class Main extends BaseModelRMDB {
     }
 
     // Check database
-    this.Knex.raw('select 1+1 as result')
-      .then(() => { // There is a valid connection in the pool
+    this.Knex.raw('SELECT 1+1 AS result')
+      .then(() => {
+        // There is a valid connection in the pool
         response.uptime = process.uptime() + ' seconds'
         response.database = {
           healthy: true,
-          dbname: this.Knex.client.databaseName
+          dbname: this.Knex.client.connectionSettings.database
         }
 
         deferred.resolve(response)
@@ -50,7 +49,7 @@ class Main extends BaseModelRMDB {
       .catch(() => {
         response.database = {
           healthy: false,
-          dbname: this.Knex.client.databaseName
+          dbname: this.Knex.client.connectionSettings.database
         }
 
         deferred.resolve(response)

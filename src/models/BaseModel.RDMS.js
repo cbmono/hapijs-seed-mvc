@@ -1,5 +1,3 @@
-'use strict'
-
 //
 // External dependencies
 //
@@ -33,7 +31,7 @@ const dbConfig = require('config').get('database')
  * @see: http://knexjs.org/
  *
  ******************************************/
-class BaseModelRMDB {
+class BaseModelRDMS {
 
   /**
    * Constructor
@@ -195,4 +193,4 @@ class BaseModelRMDB {
 //
 // Export module
 //
-module.exports = BaseModelRMDB
+module.exports = BaseModelRDMS

@@ -1,5 +1,3 @@
-'use strict'
-
 //
 // Internal dependencies
 //
@@ -23,7 +21,6 @@ class MainController extends BaseController {
       .catch(reply)
   }
 }
-
 
 
 //
