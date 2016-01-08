@@ -103,7 +103,7 @@ class BaseModelRDMS {
       data = this._setTimestamps(data)
     }
 
-    let response = this.Knex(this.tableName).insert(data)
+    response = this.Knex(this.tableName).insert(data)
 
     if (dbConfig.client === 'pg') {
       // Return all inserted rows in case of Postgres
