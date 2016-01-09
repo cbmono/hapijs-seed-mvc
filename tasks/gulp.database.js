@@ -20,53 +20,83 @@ var knexConfig = JSON.parse(JSON.stringify(config.get('database')))
 // Tasks
 //
 
-// Apply latest migrations
-gulp.task('database:migrate', () => {
+// Apply latest migration
+gulp.task('db:migrate', () => {
   var knex = Knex(knexConfig)
 
   knex.migrate.latest({
     directory: migrationSrc
   })
-  .then(() => {
-    gutil.log('>>> Migration successful')
+  .then((response) => {
+    if (response[1].length) {
+      gutil.log(gutil.colors.green.bold('Migration successful!'))
+      gutil.log(
+        gutil.colors.yellow('> Executed Migration(s):'),
+        "\n- " + response[1].join("\n- ")
+      )
+    }
+    else {
+      gutil.log(gutil.colors.yellow.bold('DB Schema already up to date'))
+    }
+
     process.exit(0)
   })
   .catch((err) => {
-    gutil.error('Migrate failed', err)
+    gutil.log(gutil.colors.red.bold('Migration failed: '), err)
     process.exit(1)
   })
 })
 
 // Rollback latest migration
-gulp.task('database:rollback', () => {
+gulp.task('db:rollback', () => {
   var knex = Knex(knexConfig)
 
   knex.migrate.rollback({
     directory: migrationSrc
   })
-  .then(() => {
-    gutil.log('>>> Rollback successful')
+  .then((response) => {
+    if (response[1].length) {
+      gutil.log(gutil.colors.green.bold('Rollback successful!'))
+      gutil.log(
+        gutil.colors.yellow('> Rolledback Migration(s):'),
+        "\n- " + response[1].join("\n- ")
+      )
+    }
+    else {
+      gutil.log(gutil.colors.yellow.bold('No migrations to Rollback'))
+    }
+
     process.exit(0)
   })
   .catch((err) => {
-    gutil.error('Rollback failed', err)
+    gutil.log(gutil.colors.red.bold('Rollback failed: '), err)
     process.exit(1)
   })
 })
 
 // Insert seeds
-gulp.task('database:seed', () => {
+gulp.task('db:seed', () => {
   var knex = Knex(knexConfig)
 
   knex.seed.run({
     directory: seedSrc
   })
-  .then(() => {
-    gutil.log('>>> Seed successful')
+  .then((response) => {
+    if (response[0].length) {
+      gutil.log(gutil.colors.green.bold('Seed successful!'))
+      gutil.log(
+        gutil.colors.yellow('> Executed Seeds:'),
+        "\n- " + response[0].join("\n- ")
+      )
+    }
+    else {
+      gutil.log(gutil.colors.yellow.bold('No Seed files to run'))
+    }
+
     process.exit(0)
   })
   .catch((err) => {
-    gutil.error('Seed failed', err)
+    gutil.log(gutil.colors.red('Seed failed: '), err)
     process.exit(1)
   })
 })

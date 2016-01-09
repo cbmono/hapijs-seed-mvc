@@ -54,6 +54,6 @@ gulp.task('test', () => runSequence(
   process.exit
 ))
 .on('error', (error) => {
-  gutil.error('Error running tests', error)
+  gutil.log(gutil.colors.red('Error running tests: '), error)
   process.exit(1)
 })
