@@ -1,7 +1,7 @@
 {
   "name": "hapijs-mvc-seed-es6",
   "version": "1.0.0",
-  "description": "Seed project for hapijs MVC + RDMS",
+  "description": "Seed project for hapijs: MVC + RDMS",
   "author": "Claudio Bredfeldt <claudio@cbmono.de>",
   "license": "MIT",
   "main": "index.js",
