@@ -7,7 +7,7 @@ const Boom = require('boom')
 // Internal dependencies
 //
 const log = require('../logger')
-const ToDoList = require('../models/TodoList')
+const ToDo = require('../models/Todo')
 
 
 /******************************************
@@ -18,62 +18,62 @@ const ToDoList = require('../models/TodoList')
 module.exports = new class TodoListsController {
 
   /**
-   * Retrieve the list of all ToDo lists
+   * Retrieve the list of all ToDo's
    */
   index(request, reply) {
-    ToDoList.findAll()
+    ToDo.findAll()
       .then(reply)
       .catch((err) => reply(Boom.wrap(err)))
   }
 
   /**
-   * Retrieve a single ToDo list
+   * Retrieve a single ToDo
    */
   view(request, reply) {
     let id = request.params.id
 
-    ToDoList.findById(id)
+    ToDo.findById(id)
       .then((response) => {
         if (response) {
           reply(response)
           return
         }
 
-        reply(Boom.notFound(`ToDo List id:${ id } not found`))
+        reply(Boom.notFound(`ToDo id:${ id } not found`))
       })
       .catch((err) => reply(Boom.wrap(err)))
   }
 
   /**
-   * Create a new ToDo list
+   * Create a new ToDo
    */
   create(request, reply) {
     let data = request.payload
 
-    ToDoList.save(data)
+    ToDo.save(data)
       .then(reply)
       .catch((err) => reply(Boom.wrap(err)))
   }
 
   /**
-   * Update an existing ToDo list
+   * Update an existing ToDo
    */
   update(request, reply) {
     let id = request.params.id
       , data = request.payload
 
-    ToDoList.update(id, data)
+    ToDo.update(id, data)
       .then(reply)
       .catch((err) => reply(Boom.wrap(err)))
   }
 
   /**
-   * Delente a ToDo list
+   * Delete a ToDo
    */
   remove(request, reply) {
     let id = request.params.id
 
-    ToDoList.del(id)
+    ToDo.del(id)
       .then(reply)
       .catch((err) => reply(Boom.wrap(err)))
   }

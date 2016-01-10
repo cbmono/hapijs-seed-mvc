@@ -1,7 +1,6 @@
 //
 // Internal dependencies
 //
-const BaseController = require('./base.controller')
 const Main = require('../models/Main')
 
 
@@ -10,7 +9,7 @@ const Main = require('../models/Main')
  * Controller for 'main'
  *
  ******************************************/
-module.exports = new class MainController extends BaseController {
+module.exports = new class MainController {
 
   /**
    * Display the status of the application
