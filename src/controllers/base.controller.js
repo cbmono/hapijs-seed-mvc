@@ -1,36 +1,20 @@
-//
-// External dependencies
-//
-const Boom = require('boom')
-
-//
-// Internal dependencies
-//
-const logger = require('../logger')
-
-
 /******************************************
  *
- * Define a basic skeleton for all custom controllers
+ * Define a basic skeleton for all custom controllers.
  *
- * This (abstract) class is meant to extend any custom controller.
- * It gives you access to the custom logging (Good) and
- * Boom (used to handle RESTful HTTP errors)
- *
- * @see: https://github.com/hapijs/good
- * @see: https://github.com/hapijs/boom
+ * Extend your controller with this class if want to have shared
+ * methods across all your contollers or if you want to initialise
+ * code across your controllers (via the `constructor()`)
  *
  ******************************************/
- class BaseController {
+ module.exports = class BaseController {
 
+  /**
+   * Constructor
+   */
   constructor() {
-    this.log = logger
-    this.Boom = Boom
+    // Initialise some shared code here
   }
+
+  // Extend with shared methods ...
 }
-
-
-//
-// Export module
-//
-module.exports = BaseController

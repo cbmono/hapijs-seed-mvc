@@ -1,8 +1,10 @@
 exports.seed = (Knex, Promise) => {
   return new Promise((resolve) => {
-    const tableName = 'todos'
+    const tableName = 'todo_lists'
 
     var now = new Date
+
+    // Dummy data
     var data = [
       {
         name: 'Housing',
@@ -21,6 +23,9 @@ exports.seed = (Knex, Promise) => {
       }
     ]
 
-    Knex(tableName).insert(data).then(resolve)
+    // Insert seeds into DB
+    return Knex(tableName)
+      .insert(data)
+      .then(resolve)
   })
 }

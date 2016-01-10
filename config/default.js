@@ -1,8 +1,9 @@
 //
 // This file is the default config file and
-// it contains configuration data for all environments.
+// contains common configuration data for all environments.
+//
 // You can overwrite specific settings by just creating
-// the corresponding block in your environment config file:
+// the corresponding block in your environment config file, ie:
 //
 //   // config/local.js
 //

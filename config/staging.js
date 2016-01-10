@@ -6,7 +6,7 @@ module.exports = {
 
   //
   // Database
-  // DB name is defined in default.coffee
+  // DB name is defined in default.js
   //
   database: {
     //

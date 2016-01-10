@@ -14,8 +14,11 @@ const BaseModelRDMS = require('./BaseModel.RDMS')
  * Main
  *
  ******************************************/
-class Main extends BaseModelRDMS {
+module.exports = new class Main extends BaseModelRDMS {
 
+  /**
+   * Constructor
+   */
   constructor() {
     super('EMPTY')
   }
@@ -58,9 +61,3 @@ class Main extends BaseModelRDMS {
     return deferred.promise
   }
 }
-
-
-//
-// Export module
-//
-module.exports = new Main

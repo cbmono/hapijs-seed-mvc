@@ -1,8 +1,3 @@
-//
-// If you change this file to local.js,
-// it will be the last one to be loaded
-// and the values will overwrite all the others.
-//
 module.exports = {
   //
   // Database

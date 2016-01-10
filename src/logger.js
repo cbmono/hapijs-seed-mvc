@@ -1,4 +1,5 @@
 let winston = require('winston')
+let Purdy = require('purdy')
 let loggingConfig = require('config').logging
 
 // Prepare transports
@@ -10,7 +11,8 @@ if (loggingConfig.console) {
 
 // Setup winston
 winston = new winston.Logger({
-  transports: transports
+  transports: transports,
+  rewriters: [ ((level, msg, meta) => Purdy(meta)) ]
 })
 
 // Export

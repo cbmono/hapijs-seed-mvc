@@ -6,22 +6,24 @@ const joi = require('joi')
 
 /******************************************
  *
- * Define basic CRUD skeleton for all custom routes
+ * Define a basic CRUD skeleton for all custom routes
  *
- * This (abstract) class is meant to extend any custom routes.
- * It gives you access to Joi, used for payload validations.
- * Follows RESTful and CRUD conventions:
+ * This (abstract) class is meant to extend any custom route.
+ * It gives you access to Joi, used for payload validations, and
+ * follows the RESTful and CRUD conventions.
+ *
+ * Available CRUD end-points:
  *
  *    * index
  *    * view
  *    * create
  *    * update
- *    * remove (delete is a reserved word)
+ *    * remove (`delete` is a reserved word)
  *
  *  @see: https://github.com/hapijs/joi
  *
  ******************************************/
-class BaseRoutes {
+module.exports = class BaseRoutes {
 
   /**
    * Constructor
@@ -59,7 +61,7 @@ class BaseRoutes {
   }
 
   /**
-   * Get one entry by ID
+   * Get an entry by ID
    *
    * @return {object}
    */
@@ -69,7 +71,7 @@ class BaseRoutes {
       path: this.endpoint + '/{id}',
       config: {
         handler: this.controller.view,
-        description: 'Get one entry by ID',
+        description: 'Get an entry by ID',
         tags: [ 'public' ],
         validate: {
           params: {
@@ -95,7 +97,7 @@ class BaseRoutes {
         tags: [ 'public' ],
         validate: {
           payload: {
-            // Extend
+            // Extend in your own implementation
           }
         }
       }
@@ -103,7 +105,7 @@ class BaseRoutes {
   }
 
   /**
-   * Update an existing entry by passing the ID
+   * Update an existing entry by passing the entry ID
    *
    * @return {object}
    */
@@ -113,14 +115,14 @@ class BaseRoutes {
       path: this.endpoint + '/{id}',
       config: {
         handler: this.controller.update,
-        description: 'Update an existing entry by passing the ID',
+        description: 'Update an existing entry by passing the entry ID',
         tags: [ 'public' ],
         validate: {
           params: {
             id: this.joi.number().integer().required().description('ID, primary key')
           },
           payload: {
-            // Extend
+            // Extend in your own implementation
           }
         }
       }
@@ -128,7 +130,7 @@ class BaseRoutes {
   }
 
   /**
-   * Delete a entry by passing the ID
+   * Delete a entry by passing the entry ID
    *
    * @return {object}
    */
@@ -138,7 +140,7 @@ class BaseRoutes {
       path: this.endpoint + '/{id}',
       config: {
         handler: this.controller.remove,
-        description: 'Delete a entry by passing the ID',
+        description: 'Delete a entry by passing the entry ID',
         tags: [ 'public' ],
         validate: {
           params: {
@@ -149,9 +151,3 @@ class BaseRoutes {
     }
   }
 }
-
-
-//
-// Export module
-//
-module.exports = BaseRoutes

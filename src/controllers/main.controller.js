@@ -10,7 +10,7 @@ const Main = require('../models/Main')
  * Controller for 'main'
  *
  ******************************************/
-class MainController extends BaseController {
+module.exports = new class MainController extends BaseController {
 
   /**
    * Display the status of the application
@@ -21,9 +21,3 @@ class MainController extends BaseController {
       .catch(reply)
   }
 }
-
-
-//
-// Export module
-//
-module.exports = new MainController

@@ -16,7 +16,7 @@ const serverConfig = config.get('server')
 //
 // Internal dependencies
 //
-const logger = require('./logger')
+const log = require('./logger')
 const pluginsConfig = require('../config/plugins')
 
 //
@@ -56,8 +56,8 @@ fs.readdirSync(routesNormalizedPath).forEach((file) => {
 //
 ///////////////////////////////////////
 server.start(() => {
-  logger.info('////////////////////////////////////////////////')
-  logger.info('Server running at: ', server.info.uri)
-  logger.info('With NODE_ENV: ', process.env.NODE_ENV || 'local')
-  logger.info('////////////////////////////////////////////////')
+  log.info({
+    'Server running at': server.info.uri,
+    'With NODE_ENV': process.env.NODE_ENV || 'local'
+  })
 })

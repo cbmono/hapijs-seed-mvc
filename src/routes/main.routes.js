@@ -10,8 +10,11 @@ const controller = require('../controllers/main.controller')
  * Main (global) routes
  *
  ******************************************/
-class MainRoutes extends BaseRoutes {
+let routes = new class MainRoutes extends BaseRoutes {
 
+  /**
+   * Constructor
+   */
   constructor() {
     super(controller)
   }
@@ -57,10 +60,8 @@ class MainRoutes extends BaseRoutes {
 
 
 //
-// Export module
+// Export public end-points
 //
-let routes = new MainRoutes
-
 module.exports = [
   routes.healthcheck(),
   routes.staticFiles()

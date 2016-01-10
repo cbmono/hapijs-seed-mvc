@@ -20,6 +20,9 @@ const dbConfig = require('config').get('database')
  *
  * 		* find()
  * 		* findBy()
+ * 		* save()
+ * 		* update()
+ * 		* ... etc.
  *
  * Supported Relational Databases :
  *
@@ -31,7 +34,7 @@ const dbConfig = require('config').get('database')
  * @see: http://knexjs.org/
  *
  ******************************************/
-class BaseModelRDMS {
+module.exports = class BaseModelRDMS {
 
   /**
    * Constructor
@@ -51,7 +54,6 @@ class BaseModelRDMS {
       throw new Error('Model: DB table name undefined')
     }
   }
-
 
   /**
    * Fetch all entries from DB table
@@ -147,6 +149,18 @@ class BaseModelRDMS {
   }
 
   /**
+   * Delete one/many entries
+   * (Alias for `remove()`)
+   *
+   * @param {mixed|array} id
+   *        One single ID or array of ID's
+   * @return {promise}
+   */
+  del(id) {
+    return this.remove(id)
+  }
+
+  /**
    * Create a DateTime string with the current server time
    *
    * @return {string}
@@ -188,9 +202,3 @@ class BaseModelRDMS {
     return newData
   }
 }
-
-
-//
-// Export module
-//
-module.exports = BaseModelRDMS
