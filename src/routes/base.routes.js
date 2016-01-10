@@ -105,7 +105,7 @@ module.exports = class BaseRoutes {
   }
 
   /**
-   * Update an existing entry by passing the entry ID
+   * Update an existing entry
    *
    * @return {object}
    */
@@ -115,7 +115,7 @@ module.exports = class BaseRoutes {
       path: this.endpoint + '/{id}',
       config: {
         handler: this.controller.update,
-        description: 'Update an existing entry by passing the entry ID',
+        description: 'Update an existing entry',
         tags: [ 'public' ],
         validate: {
           params: {
@@ -130,7 +130,7 @@ module.exports = class BaseRoutes {
   }
 
   /**
-   * Delete a entry by passing the entry ID
+   * Delete an entry
    *
    * @return {object}
    */
@@ -140,7 +140,7 @@ module.exports = class BaseRoutes {
       path: this.endpoint + '/{id}',
       config: {
         handler: this.controller.remove,
-        description: 'Delete a entry by passing the entry ID',
+        description: 'Delete an entry',
         tags: [ 'public' ],
         validate: {
           params: {

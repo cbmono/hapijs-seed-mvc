@@ -7,7 +7,7 @@ const Boom = require('boom')
 // Internal dependencies
 //
 const log = require('../logger')
-const ToDo = require('../models/Todo')
+const ToDo = require('../models/ToDo')
 
 
 /******************************************

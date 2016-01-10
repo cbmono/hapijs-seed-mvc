@@ -64,21 +64,6 @@ let routes = new class TodosRoutes extends BaseRoutes {
 
     return route
   }
-
-  /**
-   * Delete a specific ToDo
-   *
-   * @return {object}
-   */
-  remove() {
-    // Get route settings from parent
-    let route = super.remove()
-
-    // Update end-point description (used in Documentation)
-    route.config.description = 'Delete a specific ToDo'
-
-    return route
-  }
 }
 
 

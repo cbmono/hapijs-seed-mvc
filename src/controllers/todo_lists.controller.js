@@ -45,6 +45,26 @@ module.exports = new class TodoListsController {
   }
 
   /**
+   * Retrieve a single ToDo list and all its ToDo's
+   */
+  viewAll(request, reply) {
+    let id = request.params.id
+
+    ToDoList.findAndTodos(id)
+      .then((response) => {
+        log.debug(response)
+        reply(response)
+        // if (response) {
+        //   reply(response)
+        //   return
+        // }
+        //
+        // reply(Boom.notFound(`ToDo List id:${ id } not found`))
+      })
+      .catch((err) => reply(Boom.wrap(err)))
+  }
+
+  /**
    * Create a new ToDo list
    */
   create(request, reply) {
