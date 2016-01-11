@@ -14,11 +14,11 @@ The seed contains a sample [hapi] application (ToDo Lists) and is preconfigured 
 - Pre-configured environments (_local_, _dev_, _staging_, _production_)
 - Powerful payload validations via [joi]
 - Auto-generated documentation ([lout])
-- Unit & Integration tests examples ([Mocha]/[Chai])
+- Unit & Integration tests examples ([Jasmine2])
 - RESTful outputs
 - Improved Logging and Remote debugging
 - Healthcheck end-point
-- [Gulp] for workflows (ie. launch local server for development)
+- [Gulp] for workflows (ie. watch files changes and launch local server)
 - \+ all features and plugin's from [hapi]
 
 ---
@@ -99,13 +99,34 @@ You can populate your DB tables by running seed files:
 
 ## Tests
 
-Unit tests are stored within the folders of the implementations.
-Integration tests are stored under /tests/integration.
-````
-npm test
-````
-If you are testing server responses probably you have to start the server in another terminal using ```` gulp ````
+This project has to kind of tests: UnitTest and Integration tests. For both [Jasmine2] is being used. If you want to execute both kind of tests at the same time, you can do:
+```
+$ gulp test
+```
 
+### UnitTest's
+
+UnitTest's are stored within the folders of the implementation and contain `.spec` as part of their file name. For instance `src/controllers/main.controller.js` and `src/controllers/main.controller.spec.js`. This pattern makes it easier not to forget to write tests :)
+
+You can execute them by running:
+```
+$ gulp test:unit
+```
+
+### Integration Tests
+
+Integration Tests are stored under `/tests/integration` and are meant to test the API end-points, for instance: `curl localhost:3000/healthcheck`
+
+In order to test the server responses you have to start the server in a new terminal/tab:
+```
+$ cd /path/to/your/project
+$ gulp
+```
+
+Then execute your integration test by running:
+```
+$ gulp test:integration
+```
 
 ## API Documentation
 
@@ -136,7 +157,6 @@ $ forever start index.js
 [knex.js]:  http://knexjs.org/
 [lout]:     https://github.com/hapijs/lout
 [joi]:      https://github.com/hapijs/joi
-[Mocha]:    https://mochajs.org/
-[Chai]:     http://chaijs.com/
+[Jasmine2]: http://jasmine.github.io/2.4/introduction.html
 [Gulp]:     http://gulpjs.com/
 [forever]:  https://github.com/foreverjs/forever

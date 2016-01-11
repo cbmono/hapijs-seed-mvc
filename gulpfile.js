@@ -1,5 +1,8 @@
 'use static'
 
+require('babel-polyfill')
+require('babel-register')
+
 //
 // Dependencies
 //

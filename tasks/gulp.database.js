@@ -11,10 +11,9 @@ const config = require('config')
 //
 // Variables
 //
-var jsSrc = 'src/**/*.js'
 var migrationSrc = './database/migrations'
-var seedSrc = './database/seeds'
-var knexConfig = JSON.parse(JSON.stringify(config.get('database')))
+  , seedSrc = './database/seeds'
+  , knexConfig = JSON.parse(JSON.stringify(config.get('database')))
 
 //
 // Tasks

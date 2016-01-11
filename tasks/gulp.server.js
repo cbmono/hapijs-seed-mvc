@@ -11,8 +11,8 @@ const config = require('config')
 //
 // Variables
 //
-var jsSrc = 'src/**/*.js'
-var appInitSrc = 'index.js'
+var appSrc = 'src/**/!(*.spec)*.js'
+  , appInitSrc = 'index.js'
 
 //
 // Tasks
@@ -20,13 +20,13 @@ var appInitSrc = 'index.js'
 
 // Lint Javascript code
 gulp.task('jshint', () => gulp
-  .src(jsSrc)
+  .src(appSrc)
   .pipe(jshint())
 )
 
 // Keep track of file changes
 gulp.task('watch', () => gulp
-  .watch(jsSrc, [ 'jshint' ])
+  .watch(appSrc)
 )
 
 // Local node server
