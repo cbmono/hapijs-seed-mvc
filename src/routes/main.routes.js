@@ -1,8 +1,8 @@
 //
 // Internal dependencies
 //
-const BaseRoutes = require('./base.routes')
-const controller = require('../controllers/main.controller')
+import { MainController } from '../controllers/main.controller'
+import { BaseRoutes } from './base.routes'
 
 
 /******************************************
@@ -16,7 +16,7 @@ let routes = new class MainRoutes extends BaseRoutes {
    * Constructor
    */
   constructor() {
-    super(controller)
+    super(new MainController())
   }
 
   /**
@@ -29,7 +29,7 @@ let routes = new class MainRoutes extends BaseRoutes {
       method: 'GET',
       path: '/healthcheck',
       config: {
-        handler: this.controller.healthcheck,
+        handler: this.controller.healthcheck.bind(this.controller),
         description: 'Display the status of the App and DB connection',
         tags: [ 'public' ]
       }
@@ -62,7 +62,7 @@ let routes = new class MainRoutes extends BaseRoutes {
 //
 // Export public end-points
 //
-module.exports = [
+export default [
   routes.healthcheck(),
   routes.staticFiles()
 ]

@@ -6,7 +6,7 @@ const Q = require('q')
 //
 // Internal dependencies
 //
-const BaseModelRDMS = require('./BaseModel.RDMS')
+import { BaseModelRDMS } from './BaseModel.RDMS'
 
 
 /******************************************
@@ -14,7 +14,7 @@ const BaseModelRDMS = require('./BaseModel.RDMS')
  * Main
  *
  ******************************************/
-module.exports = new class Main extends BaseModelRDMS {
+export class Main extends BaseModelRDMS {
 
   /**
    * Constructor
@@ -28,8 +28,7 @@ module.exports = new class Main extends BaseModelRDMS {
    *
    * @return {promise}
    */
-  doHealthcheck(mono = 'mono') {
-    let that = this
+  doHealthcheck() {
     let deferred = Q.defer()
     let response = {
       ping: 'pong',

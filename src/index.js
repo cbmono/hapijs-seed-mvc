@@ -16,8 +16,10 @@ const serverConfig = config.get('server')
 //
 // Internal dependencies
 //
-const log = require('./logger')
 const pluginsConfig = require('../config/plugins')
+
+// Make `log` available across the whole App
+GLOBAL.log = require('./logger')
 
 //
 // Setup the server
@@ -45,7 +47,8 @@ let routesNormalizedPath = path.join(__dirname, 'routes')
 
 fs.readdirSync(routesNormalizedPath).forEach((file) => {
   if (file !== 'base.routes.js') {
-    server.route(require('./routes/' + file))
+    let route = require('./routes/' + file)
+    server.route(route.default)
   }
 })
 

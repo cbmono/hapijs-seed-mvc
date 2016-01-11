@@ -1,3 +1,9 @@
+//
+// External dependencies
+//
+const Boom = require('boom')
+
+
 /******************************************
  *
  * Define a basic skeleton for all custom controllers.
@@ -7,13 +13,15 @@
  * code across your controllers (via the `constructor()`)
  *
  ******************************************/
- module.exports = class BaseController {
+ export class BaseController {
 
   /**
    * Constructor
    */
   constructor() {
-    // Initialise some shared code here
+    this.Boom = Boom
+
+    // Initialise more shared code here ...
   }
 
   // Extend with shared methods ...

@@ -1,8 +1,8 @@
 //
 // Internal dependencies
 //
-const BaseRoutes = require('./base.routes')
-const controller = require('../controllers/todos.controller')
+import { ToDosController } from '../controllers/todos.controller'
+import { BaseRoutes } from './base.routes'
 
 
 /******************************************
@@ -17,7 +17,7 @@ let routes = new class TodosRoutes extends BaseRoutes {
    */
   constructor() {
     let endpointName = '/todos'
-    super(controller, endpointName)
+    super(new ToDosController(), endpointName)
   }
 
   /**
@@ -70,7 +70,7 @@ let routes = new class TodosRoutes extends BaseRoutes {
 //
 // Export public end-points
 //
-module.exports = [
+export default [
   routes.index(),
   routes.view(),
   routes.create(),

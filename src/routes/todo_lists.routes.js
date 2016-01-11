@@ -1,9 +1,8 @@
 //
 // Internal dependencies
 //
-const BaseRoutes = require('./base.routes')
-const controller = require('../controllers/todo_lists.controller')
-
+import { ToDoListsController } from '../controllers/todo_lists.controller'
+import { BaseRoutes } from './base.routes'
 
 /******************************************
  *
@@ -17,7 +16,7 @@ let routes = new class TodoListsRoutes extends BaseRoutes {
    */
   constructor() {
     let endpointName = '/todo-lists'
-    super(controller, endpointName)
+    super(new ToDoListsController(), endpointName)
   }
 
   /**
@@ -32,7 +31,7 @@ let routes = new class TodoListsRoutes extends BaseRoutes {
     // Overwrite attributes
     route.path += '/todos'
     route.config.description = `Retrieve a ToDo list and all its ToDo's`
-    route.config.handler = this.controller.viewAll
+    route.config.handler = this.controller.viewAll.bind(this.controller)
 
     return route
   }
@@ -82,7 +81,7 @@ let routes = new class TodoListsRoutes extends BaseRoutes {
 //
 // Export public end-points
 //
-module.exports = [
+export default [
   routes.index(),
   routes.view(),
   routes.viewAll(),

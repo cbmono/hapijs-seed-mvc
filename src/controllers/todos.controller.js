@@ -1,13 +1,8 @@
 //
-// External dependencies
-//
-const Boom = require('boom')
-
-//
 // Internal dependencies
 //
-const log = require('../logger')
-const ToDo = require('../models/ToDo')
+import { ToDo } from '../models/ToDo'
+import { BaseController } from './base.controller'
 
 
 /******************************************
@@ -15,15 +10,23 @@ const ToDo = require('../models/ToDo')
  * Controller for ToDo lists
  *
  ******************************************/
-module.exports = new class TodoListsController {
+export class ToDosController extends BaseController {
+
+  /**
+   * Constructor
+   */
+  constructor() {
+    super()
+    this.ToDo = new ToDo()
+  }
 
   /**
    * Retrieve the list of all ToDo's
    */
   index(request, reply) {
-    ToDo.findAll()
+    this.ToDo.findAll()
       .then(reply)
-      .catch((err) => reply(Boom.wrap(err)))
+      .catch((err) => reply(this.Boom.wrap(err)))
   }
 
   /**
@@ -32,16 +35,16 @@ module.exports = new class TodoListsController {
   view(request, reply) {
     let id = request.params.id
 
-    ToDo.findById(id)
+    this.ToDo.findById(id)
       .then((response) => {
         if (response) {
           reply(response)
           return
         }
 
-        reply(Boom.notFound(`ToDo id:${ id } not found`))
+        reply(this.Boom.notFound(`ToDo id:${ id } not found`))
       })
-      .catch((err) => reply(Boom.wrap(err)))
+      .catch((err) => reply(this.Boom.wrap(err)))
   }
 
   /**
@@ -50,9 +53,9 @@ module.exports = new class TodoListsController {
   create(request, reply) {
     let data = request.payload
 
-    ToDo.save(data)
+    this.ToDo.save(data)
       .then(reply)
-      .catch((err) => reply(Boom.wrap(err)))
+      .catch((err) => reply(this.Boom.wrap(err)))
   }
 
   /**
@@ -62,9 +65,9 @@ module.exports = new class TodoListsController {
     let id = request.params.id
       , data = request.payload
 
-    ToDo.update(id, data)
+    this.ToDo.update(id, data)
       .then(reply)
-      .catch((err) => reply(Boom.wrap(err)))
+      .catch((err) => reply(this.Boom.wrap(err)))
   }
 
   /**
@@ -73,8 +76,8 @@ module.exports = new class TodoListsController {
   remove(request, reply) {
     let id = request.params.id
 
-    ToDo.del(id)
+    this.ToDo.del(id)
       .then(reply)
-      .catch((err) => reply(Boom.wrap(err)))
+      .catch((err) => reply(this.Boom.wrap(err)))
   }
 }

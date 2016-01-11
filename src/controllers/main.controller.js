@@ -1,7 +1,7 @@
 //
 // Internal dependencies
 //
-const Main = require('../models/Main')
+import { Main } from '../models/Main'
 
 
 /******************************************
@@ -9,13 +9,20 @@ const Main = require('../models/Main')
  * Controller for 'main'
  *
  ******************************************/
-module.exports = new class MainController {
+export class MainController {
+
+  /**
+   * Constructor
+   */
+  constructor() {
+    this.Main = new Main()
+  }
 
   /**
    * Display the status of the application
    */
   healthcheck(request, reply) {
-    Main.doHealthcheck()
+    this.Main.doHealthcheck()
       .then(reply)
       .catch(reply)
   }

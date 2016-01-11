@@ -1,24 +1,30 @@
 //
 // External dependencies
 //
-const chai = require('chai')
-const expect = chai.expect
+const Q = require('q')
 
 //
 // Internal dependencies
 //
-const controller = require('./main.controller')
+import { MainController } from './main.controller'
 
 //
 // Tests
 //
 describe('Controller: Main', () => {
+  let controller
+
+  beforeEach(() => {
+    controller = new MainController()
+    spyOn(controller.Main, 'doHealthcheck').and.returnValue(Q.when({}))
+  })
 
   it('should be defined', () => {
-    expect(controller).not.to.be.undefined
+    expect(controller).not.toBe(undefined)
   })
 
   it('should expose healthcheck()', () => {
-    expect(controller.healthcheck).not.to.be.undefined
+    controller.healthcheck()
+    expect(controller.Main.doHealthcheck).toHaveBeenCalled()
   })
 })

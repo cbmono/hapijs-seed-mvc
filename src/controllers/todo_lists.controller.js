@@ -1,13 +1,8 @@
 //
-// External dependencies
-//
-const Boom = require('boom')
-
-//
 // Internal dependencies
 //
-const log = require('../logger')
-const ToDoList = require('../models/TodoList')
+import { ToDoList } from '../models/ToDoList'
+import { BaseController } from './base.controller'
 
 
 /******************************************
@@ -15,15 +10,23 @@ const ToDoList = require('../models/TodoList')
  * Controller for ToDo lists
  *
  ******************************************/
-module.exports = new class TodoListsController {
+export class ToDoListsController extends BaseController {
+
+  /**
+   * Constructor
+   */
+  constructor() {
+    super()
+    this.ToDoList = new ToDoList()
+  }
 
   /**
    * Retrieve the list of all ToDo lists
    */
   index(request, reply) {
-    ToDoList.findAll()
+    this.ToDoList.findAll()
       .then(reply)
-      .catch((err) => reply(Boom.wrap(err)))
+      .catch((err) => reply(this.Boom.wrap(err)))
   }
 
   /**
@@ -32,16 +35,16 @@ module.exports = new class TodoListsController {
   view(request, reply) {
     let id = request.params.id
 
-    ToDoList.findById(id)
+    this.ToDoList.findById(id)
       .then((response) => {
         if (response) {
           reply(response)
           return
         }
 
-        reply(Boom.notFound(`ToDo List id:${ id } not found`))
+        reply(this.Boom.notFound(`ToDo List id:${ id } not found`))
       })
-      .catch((err) => reply(Boom.wrap(err)))
+      .catch((err) => reply(this.Boom.wrap(err)))
   }
 
   /**
@@ -50,18 +53,16 @@ module.exports = new class TodoListsController {
   viewAll(request, reply) {
     let id = request.params.id
 
-    ToDoList.findAndTodos(id)
+    this.ToDoList.findByIdWithTodos(id)
       .then((response) => {
-        log.debug(response)
-        reply(response)
-        // if (response) {
-        //   reply(response)
-        //   return
-        // }
-        //
-        // reply(Boom.notFound(`ToDo List id:${ id } not found`))
+        if (response) {
+          reply(response)
+          return
+        }
+
+        reply(this.Boom.notFound(`ToDo List id:${ id } not found`))
       })
-      .catch((err) => reply(Boom.wrap(err)))
+      .catch((err) => reply(this.Boom.wrap(err)))
   }
 
   /**
@@ -70,9 +71,9 @@ module.exports = new class TodoListsController {
   create(request, reply) {
     let data = request.payload
 
-    ToDoList.save(data)
+    this.ToDoList.save(data)
       .then(reply)
-      .catch((err) => reply(Boom.wrap(err)))
+      .catch((err) => reply(this.Boom.wrap(err)))
   }
 
   /**
@@ -82,9 +83,9 @@ module.exports = new class TodoListsController {
     let id = request.params.id
       , data = request.payload
 
-    ToDoList.update(id, data)
+    this.ToDoList.update(id, data)
       .then(reply)
-      .catch((err) => reply(Boom.wrap(err)))
+      .catch((err) => reply(this.Boom.wrap(err)))
   }
 
   /**
@@ -93,8 +94,8 @@ module.exports = new class TodoListsController {
   remove(request, reply) {
     let id = request.params.id
 
-    ToDoList.del(id)
+    this.ToDoList.del(id)
       .then(reply)
-      .catch((err) => reply(Boom.wrap(err)))
+      .catch((err) => reply(this.Boom.wrap(err)))
   }
 }

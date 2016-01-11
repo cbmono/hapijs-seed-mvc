@@ -23,7 +23,7 @@ const joi = require('joi')
  *  @see: https://github.com/hapijs/joi
  *
  ******************************************/
-module.exports = class BaseRoutes {
+export class BaseRoutes {
 
   /**
    * Constructor
@@ -53,7 +53,7 @@ module.exports = class BaseRoutes {
       method: 'GET',
       path: this.endpoint,
       config: {
-        handler: this.controller.index,
+        handler: this.controller.index.bind(this.controller),
         description: 'List all entries',
         tags: [ 'public' ]
       }
@@ -70,7 +70,7 @@ module.exports = class BaseRoutes {
       method: 'GET',
       path: this.endpoint + '/{id}',
       config: {
-        handler: this.controller.view,
+        handler: this.controller.view.bind(this.controller),
         description: 'Get an entry by ID',
         tags: [ 'public' ],
         validate: {
@@ -92,7 +92,7 @@ module.exports = class BaseRoutes {
       method: 'POST',
       path: this.endpoint,
       config: {
-        handler: this.controller.create,
+        handler: this.controller.create.bind(this.controller),
         description: 'Add a new entry',
         tags: [ 'public' ],
         validate: {
@@ -114,7 +114,7 @@ module.exports = class BaseRoutes {
       method: 'PUT',
       path: this.endpoint + '/{id}',
       config: {
-        handler: this.controller.update,
+        handler: this.controller.update.bind(this.controller),
         description: 'Update an existing entry',
         tags: [ 'public' ],
         validate: {
@@ -139,7 +139,7 @@ module.exports = class BaseRoutes {
       method: 'DELETE',
       path: this.endpoint + '/{id}',
       config: {
-        handler: this.controller.remove,
+        handler: this.controller.remove.bind(this.controller),
         description: 'Delete an entry',
         tags: [ 'public' ],
         validate: {

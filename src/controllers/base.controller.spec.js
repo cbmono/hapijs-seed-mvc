@@ -1,20 +1,20 @@
 //
-// External dependencies
-//
-const chai = require('chai')
-const expect = chai.expect
-
-//
 // Internal dependencies
 //
-const controller = require('./base.controller')
+import { BaseController } from './base.controller'
 
 //
 // Tests
 //
 describe('Controller: Base', () => {
+  let controller
+
+  beforeEach(() => {
+    controller = new BaseController()
+  })
 
   it('should be defined', () => {
-    expect(controller).not.to.be.undefined
+    expect(controller).not.toBe(undefined)
+    expect(controller.Boom).not.toBe(undefined)
   })
 })

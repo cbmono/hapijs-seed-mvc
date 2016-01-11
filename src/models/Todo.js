@@ -1,15 +1,15 @@
 //
 // Internal dependencies
 //
-const BaseModelRDMS = require('./BaseModel.RDMS')
+import { BaseModelRDMS } from './BaseModel.RDMS'
 
 
 /******************************************
  *
- * ToDo lists
+ * ToDo's
  *
  ******************************************/
-module.exports = new class ToDo extends BaseModelRDMS {
+export class ToDo extends BaseModelRDMS {
 
   /**
    * Constructor

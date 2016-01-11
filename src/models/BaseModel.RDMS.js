@@ -34,7 +34,7 @@ const dbConfig = require('config').get('database')
  * @see: http://knexjs.org/
  *
  ******************************************/
-module.exports = class BaseModelRDMS {
+export class BaseModelRDMS {
 
   /**
    * Constructor
@@ -99,6 +99,7 @@ module.exports = class BaseModelRDMS {
    *        One object with the values for each field
    *        or array of objects in case of many simultaneous inserts
    * @return {promise}
+   *        Contains an array with all inserted objects (data)
    */
   save(data) {
     if (this.setTimestamps) {
@@ -133,6 +134,7 @@ module.exports = class BaseModelRDMS {
     return this.Knex(this.tableName)
       .update(data)
       .whereIn('id', id)
+      .then(this.findById.bind(this, id))
   }
 
   /**
@@ -141,6 +143,7 @@ module.exports = class BaseModelRDMS {
    * @param {mixed|array} id
    *        One single ID or array of ID's
    * @return {promise}
+   *         Contains an integer with the amount of deleted entries
    */
   remove(id) {
     return this.Knex(this.tableName)
@@ -155,6 +158,7 @@ module.exports = class BaseModelRDMS {
    * @param {mixed|array} id
    *        One single ID or array of ID's
    * @return {promise}
+   *         Contains an integer with the amount of deleted entries
    */
   del(id) {
     return this.remove(id)
@@ -184,11 +188,12 @@ module.exports = class BaseModelRDMS {
 
   /**
    * Set the current timestamp for the fields `created_at` and `updated_at`
+   * `created_at` and `updated_at` will be added to `data` if not present.
    *
    * @param {object} data
    * @param {boolean} setCreatedAt [optional]
    *        Omit setting `created_at` (ie. in case of updates)
-   * @return {string}
+   * @return {object}
    */
   _setTimestamps(data, setCreatedAt = true) {
     let now = this.now()

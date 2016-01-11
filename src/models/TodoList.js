@@ -1,8 +1,8 @@
 //
 // Internal dependencies
 //
-const BaseModelRDMS = require('./BaseModel.RDMS')
-const ToDo = require('./ToDo')
+import { BaseModelRDMS } from './BaseModel.RDMS'
+import { ToDo } from './ToDo'
 
 
 /******************************************
@@ -10,7 +10,7 @@ const ToDo = require('./ToDo')
  * ToDo lists
  *
  ******************************************/
-module.exports = new class ToDoList extends BaseModelRDMS {
+export class ToDoList extends BaseModelRDMS {
 
   /**
    * Constructor
@@ -18,6 +18,8 @@ module.exports = new class ToDoList extends BaseModelRDMS {
   constructor() {
     let tableName = 'todo_lists'
     super(tableName)
+
+    this.ToDo = new ToDo()
   }
 
   /**
@@ -26,9 +28,9 @@ module.exports = new class ToDoList extends BaseModelRDMS {
    * @param {integer} id
    * @return {promise}
    */
-  findAndTodos(id) {
+  findByIdWithTodos(id) {
     return this.findById(id)
-      .then((response) => ToDo.findBy('todo_list_id', id)
+      .then((response) => this.ToDo.findBy('todo_list_id', id)
         .then((todos) => {
           response.todos = todos
           return response
