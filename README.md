@@ -38,32 +38,32 @@ The seed contains a sample [hapi] application (ToDo Lists) and is preconfigured 
 
 1. Fork this repo (top right button) and clone it form your account (replace `YOUR-USERNAME`)
   ```
-  $ git clone https://github.com/YOUR-USERNAME/hapijs-seed-mvc.git
-  $ cd hapijs-seed-mvc
+  git clone https://github.com/YOUR-USERNAME/hapijs-seed-mvc.git
+  cd hapijs-seed-mvc
   ```
 
 2. Install the dependencies
   ```
-  $ npm install
+  npm install
   ```
 
 3. Create a Database. In case of postgreSQL, go into your psql terminal and enter:
   ```
-  $ CREATE DATABASE todo;
+  CREATE DATABASE todo;
   ```
 
 4. Duplicate `config/local.js.default` and rename it into `config/local.js`. Then edit and enter your database settings (DB name goes into `config/default.js`).
 
 5. [Migrate the database and seed it](#database-migration-and-seed)
   ```
-  $ gulp db:migrate
-  $ gulp db:seed
+  gulp db:migrate
+  gulp db:seed
   ```
 
 6. Run the app
-  ````
-  $ gulp
-  ````
+  ```
+  gulp
+  ```
 
   (if `NODE_ENV` wasn't exported, then `local` is going to be used)
 
@@ -79,29 +79,29 @@ Knex will keep a history of your executed migrations and save them into the DB t
 
 You have to save the migrations in `database/migrations/`. It's recommended to prefix the files with an incrementing number or timestamp. Otherwise it might be hard to keep track of the order the DB changes were executed.
 
-````
-$ gulp db:migrate
-````
+```
+gulp db:migrate
+```
 
 ### Rollback
 
-You can rollback the last group of executed migrations.
-You have to save the seed files in `database/seeds/`.
-
-````
-$ gulp db:rollback
-````
+You can rollback the last group of executed migrations:
+```
+gulp db:rollback
+```
 
 ### Seeds
 
-You can populate your DB tables by running seed files:
-
+You can populate your DB tables by executing seed files through Knex. Seed files are saved in `database/seeds/`.
+```
+gulp db:seed
+```
 
 ## Tests
 
 This project has to kind of tests: UnitTest and Integration tests. For both [Jasmine2] is being used. If you want to execute both kind of tests at the same time, you can do:
 ```
-$ gulp test
+gulp test
 ```
 
 ### UnitTest's
@@ -110,7 +110,7 @@ UnitTest's are stored within the folders of the implementation and contain `.spe
 
 You can execute them by running:
 ```
-$ gulp test:unit
+gulp test:unit
 ```
 
 ### Integration Tests
@@ -119,13 +119,13 @@ Integration Tests are stored under `/tests/integration` and are meant to test th
 
 In order to test the server responses you have to start the server in a new terminal/tab:
 ```
-$ cd /path/to/your/project
-$ gulp
+cd /path/to/your/project
+gulp
 ```
 
 Then execute your integration test by running:
 ```
-$ gulp test:integration
+gulp test:integration
 ```
 
 ## API Documentation
@@ -146,11 +146,11 @@ Remote debug can be used the command line using node debug or with IDEs supporti
 
 Deploy your App on a server and you can use [forever] to run it. [forever] is used to run your App continuously. It will automatically restart if it crashes.
 ```
-$ [sudo] npm install forever -g
-$ cd /path/to/your/project
+[sudo] npm install forever -g
+cd /path/to/your/project
 
-$ export NODE_ENV=staging
-$ forever start index.js
+export NODE_ENV=staging
+forever start index.js
 ```
 
 [hapi]:     http://hapijs.com/
