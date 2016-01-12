@@ -37,7 +37,7 @@ export class ToDosController extends BaseController {
 
     this.ToDo.findById(id)
       .then((response) => {
-        if (response) {
+        if ((Array.isArray(response) && response.length) || response > 0) {
           reply(response)
           return
         }
@@ -66,7 +66,14 @@ export class ToDosController extends BaseController {
       , data = request.payload
 
     this.ToDo.update(id, data)
-      .then(reply)
+      .then((response) => {
+        if ((Array.isArray(response) && response.length) || response > 0) {
+          reply(response)
+          return
+        }
+
+        reply(this.Boom.notFound(`ToDo id:${ id } not found`))
+      })
       .catch((err) => reply(this.Boom.wrap(err)))
   }
 
@@ -77,7 +84,14 @@ export class ToDosController extends BaseController {
     let id = request.params.id
 
     this.ToDo.del(id)
-      .then(reply)
+      .then((response) => {
+        if ((Array.isArray(response) && response.length) || response > 0) {
+          reply(response)
+          return
+        }
+
+        reply(this.Boom.notFound(`ToDo id:${ id } not found`))
+      })
       .catch((err) => reply(this.Boom.wrap(err)))
   }
 }

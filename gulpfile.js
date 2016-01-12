@@ -30,6 +30,6 @@ glob.sync( gulpTasksSrc )
 //
 gulp.task('default', [
   'jshint',
-  'nodemon',
-  'watch'
+  'nodemon'
+  // 'watch'
 ])

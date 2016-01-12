@@ -34,13 +34,13 @@ export class BaseRoutes {
    *        End-point for the specific route, ie: /users/{user_id}/addresses/
    */
   constructor(controller, endpoint = '') {
+    if (!controller) {
+      throw new Error('BaseRoute: controller is undefined')
+    }
+
     this.joi = joi
     this.endpoint = endpoint
     this.controller = controller
-
-    if (!controller) {
-      throw new Error('Route: controller undefined')
-    }
   }
 
   /**

@@ -37,7 +37,7 @@ export class ToDoListsController extends BaseController {
 
     this.ToDoList.findById(id)
       .then((response) => {
-        if (response) {
+        if ((Array.isArray(response) && response.length) || response > 0) {
           reply(response)
           return
         }
@@ -55,7 +55,7 @@ export class ToDoListsController extends BaseController {
 
     this.ToDoList.findByIdWithTodos(id)
       .then((response) => {
-        if (response) {
+        if ((Array.isArray(response) && response.length) || response > 0) {
           reply(response)
           return
         }
@@ -84,7 +84,14 @@ export class ToDoListsController extends BaseController {
       , data = request.payload
 
     this.ToDoList.update(id, data)
-      .then(reply)
+      .then((response) => {
+        if ((Array.isArray(response) && response.length) || response > 0) {
+          reply(response)
+          return
+        }
+
+        reply(this.Boom.notFound(`ToDo List id:${ id } not found`))
+      })
       .catch((err) => reply(this.Boom.wrap(err)))
   }
 
@@ -95,7 +102,14 @@ export class ToDoListsController extends BaseController {
     let id = request.params.id
 
     this.ToDoList.del(id)
-      .then(reply)
+      .then((response) => {
+        if ((Array.isArray(response) && response.length) || response > 0) {
+          reply(response)
+          return
+        }
+
+        reply(this.Boom.notFound(`ToDo List id:${ id } not found`))
+      })
       .catch((err) => reply(this.Boom.wrap(err)))
   }
 }

@@ -11,9 +11,8 @@ const runSequence = require('run-sequence')
 //
 // Variables
 //
-var appSrc = 'src/**/!(*.spec)*.js'
 var unitTestSrc = 'src/**/*.spec.js'
-var integrationTestSrc = 'tests/integration/**/*.spec.js'
+var apiTestSrc = 'tests/api/**/*.js'
 
 //
 // Tasks
@@ -23,14 +22,20 @@ var integrationTestSrc = 'tests/integration/**/*.spec.js'
 gulp.task('jasmine:unit', () => gulp
   .src([ unitTestSrc ])
   .pipe(jasmine({ verbose: true }))
-  .on('error', process.exit.bind(process, 1))
+  .on('error', (err) => {
+    gutil.log(gutil.colors.red(`Error running UnitTest's: `), err)
+    process.exit(1)
+  })
 )
 
 // Mocha Integration tests
-gulp.task('jasmine:integration', () => gulp
-  .src([ integrationTestSrc ])
-  .pipe(jasmine())
-  .on('error', process.exit.bind(process, 1))
+gulp.task('jasmine:api', () => gulp
+  .src([ apiTestSrc ])
+  .pipe(jasmine({ verbose: true }))
+  .on('error', (err) => {
+    gutil.log(gutil.colors.red('Error running API Tests: '), err)
+    process.exit(1)
+  })
 )
 
 // Run only UnitTest's
@@ -41,9 +46,9 @@ gulp.task('test:unit', () => runSequence(
 ))
 
 // Run only Integration tests
-gulp.task('test:integration', () => runSequence(
+gulp.task('test:api', () => runSequence(
   'jshint',
-  'jasmine:integration',
+  'jasmine:api',
   process.exit
 ))
 
@@ -51,10 +56,10 @@ gulp.task('test:integration', () => runSequence(
 gulp.task('test', () => runSequence(
   'jshint',
   'jasmine:unit',
-  'jasmine:integration',
+  'jasmine:api',
   process.exit
 ))
-.on('error', (error) => {
-  gutil.log(gutil.colors.red('Error running tests: '), error)
+.on('error', (err) => {
+  gutil.log(gutil.colors.red('Error running tests: '), err)
   process.exit(1)
 })

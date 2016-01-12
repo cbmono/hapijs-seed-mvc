@@ -17,7 +17,7 @@ describe('Model: ToDoList', () => {
   beforeEach(() => {
     model = new ToDoList()
 
-    spyOn(model, 'findById').and.returnValue(Q.when({}))
+    spyOn(model, 'findById').and.returnValue(Q.when([{}]))
     spyOn(model.ToDo, 'findBy').and.returnValue(Q.when({}))
   })
 

@@ -70,6 +70,7 @@ export class BaseModelRDMS {
    * @param {mixed|array} value
    *        In case of Array, Knex.whereIn() is going to be used
    * @return {promise}
+   *         Contains an array with all results
    */
   findBy(field, value) {
     if (Array.isArray(value)) {
@@ -84,11 +85,10 @@ export class BaseModelRDMS {
    *
    * @param {mixed} id
    * @return {promise}
+   *         Contains an array with all results
    */
   findById(id) {
     return this.findBy('id', id)
-      // Don't return an array, since the result should be only one
-      .then((results) => results.pop())
   }
 
   /**

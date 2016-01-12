@@ -14,7 +14,7 @@ The seed contains a sample [hapi] application (ToDo Lists) and is preconfigured 
 - Pre-configured environments (_local_, _dev_, _staging_, _production_)
 - Powerful payload validations via [joi]
 - Auto-generated documentation ([lout])
-- Unit & Integration tests examples ([Jasmine2])
+- Unit & API/REST tests examples ([Jasmine2])
 - RESTful outputs
 - Improved Logging and Remote debugging
 - Healthcheck end-point
@@ -99,7 +99,7 @@ gulp db:seed
 
 ## Tests
 
-This project has to kind of tests: UnitTest and Integration tests. For both [Jasmine2] is being used. If you want to execute both kind of tests at the same time, you can do:
+This project has to kind of tests: UnitTest and API Tests. For both [Jasmine2] is being used. If you want to execute both kind of tests at the same time, you can run:
 ```
 gulp test
 ```
@@ -113,9 +113,9 @@ You can execute them by running:
 gulp test:unit
 ```
 
-### Integration Tests
+### API Tests
 
-Integration Tests are stored under `/tests/integration` and are meant to test the API end-points, for instance: `curl localhost:3000/healthcheck`
+API Tests are stored in `/tests/api` and are meant to test the RESTful end-points of your App. For instance: `curl localhost:3000/healthcheck`
 
 In order to test the server responses you have to start the server in a new terminal/tab:
 ```
@@ -123,9 +123,9 @@ cd /path/to/your/project
 gulp
 ```
 
-Then execute your integration test by running:
+Then execute your API Tests by running:
 ```
-gulp test:integration
+gulp test:api
 ```
 
 ## API Documentation
