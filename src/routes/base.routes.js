@@ -96,9 +96,7 @@ export class BaseRoutes {
         description: 'Add a new entry',
         tags: [ 'public' ],
         validate: {
-          payload: {
-            // Extend in your own implementation
-          }
+          // Extend (or overwrite) in your own implementation
         }
       }
     }
@@ -118,11 +116,10 @@ export class BaseRoutes {
         description: 'Update an existing entry',
         tags: [ 'public' ],
         validate: {
+          // Extend (or overwrite) in your own implementation
+
           params: {
             id: this.joi.number().integer().required().description('ID, primary key')
-          },
-          payload: {
-            // Extend in your own implementation
           }
         }
       }

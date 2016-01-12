@@ -11,7 +11,7 @@ const config = require('config')
 //
 // Variables
 //
-var appSrc = 'src/**/!(*.spec)*.js'
+var appSrc = 'src/**/*!(*.spec).js'
   , appInitSrc = 'index.js'
 
 //

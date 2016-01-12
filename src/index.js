@@ -46,7 +46,7 @@ for (let plugin in pluginsConfig) {
 let routesNormalizedPath = path.join(__dirname, 'routes')
 
 fs.readdirSync(routesNormalizedPath).forEach((file) => {
-  if (file !== 'base.routes.js') {
+  if (file !== 'base.routes.js' && file.indexOf('.spec.') === -1) {
     let route = require('./routes/' + file)
     server.route(route.default)
   }
