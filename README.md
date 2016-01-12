@@ -1,5 +1,4 @@
 # [hapi] Seed Project - MVC / RDMS
-[![Build Status](https://travis-ci.org/cbmono/hapijs-seed-mvc.svg?branch=master)](https://travis-ci.org/cbmono/hapijs-seed-mvc)
 
 This project is an application skeleton for a typical [hapi] RESTful API. You can use it to quickly bootstrap your [hapi] API projects and be ready to code the core of your App within minutes.
 
@@ -8,7 +7,7 @@ The seed contains a sample [hapi] application (ToDo Lists) and is preconfigured 
 - ES6 ToDo List example
 - MVC file structure + base classes (a'la Rails/Laravel/Django)
 - Relational Database support (via [knex.js])
-  - MySQL / MariaDB
+  - MySQL
   - postgreSQL
   - SQLite3
   - Schema Migrations and Seeding
