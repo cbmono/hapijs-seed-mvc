@@ -8,8 +8,5 @@ const dbConfig = require('config').get('database')
 //
 const knex = require('knex')(dbConfig)
 
-
-//
-// Export module
-//
+// Export
 module.exports = knex

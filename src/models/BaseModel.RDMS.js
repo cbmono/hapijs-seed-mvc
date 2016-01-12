@@ -7,7 +7,6 @@ const _ = require('lodash')
 // Internal dependencies
 //
 const Knex = require('../db')
-const logger = require('../logger')
 const dbConfig = require('config').get('database')
 
 
@@ -45,14 +44,14 @@ export class BaseModelRDMS {
    *        and `updated_at` on save() and update()
    */
   constructor(tableName, setTimestamps = true) {
-    this.log = logger
+    if (!tableName) {
+      throw new Error('DB table name undefined')
+    }
+
     this.Knex = Knex
+    this.dbConfig = dbConfig
     this.tableName = tableName
     this.setTimestamps = setTimestamps
-
-    if (!tableName) {
-      throw new Error('Model: DB table name undefined')
-    }
   }
 
   /**
@@ -106,9 +105,9 @@ export class BaseModelRDMS {
       data = this._setTimestamps(data)
     }
 
-    response = this.Knex(this.tableName).insert(data)
+    let response = this.Knex(this.tableName).insert(data)
 
-    if (dbConfig.client === 'pg') {
+    if (this.dbConfig.client === 'pg') {
       // Return all inserted rows in case of Postgres
       return response.returning('*')
     }
@@ -134,7 +133,7 @@ export class BaseModelRDMS {
     return this.Knex(this.tableName)
       .update(data)
       .whereIn('id', id)
-      .then(this.findById.bind(this, id))
+      .then(() => this.findById(id))
   }
 
   /**
@@ -147,8 +146,8 @@ export class BaseModelRDMS {
    */
   remove(id) {
     return this.Knex(this.tableName)
-      .whereIn('id', id)
       .del()
+      .whereIn('id', id)
   }
 
   /**
@@ -170,13 +169,11 @@ export class BaseModelRDMS {
    * @return {string}
    */
   now() {
-    let timestamp = this.Knex.raw('NOW()')
-
-    if (dbConfig.client === 'sqlite3') {
-      timestamp = this.Knex.raw("date('now')")
+    if (this.dbConfig.client === 'sqlite3') {
+      return this.Knex.raw(`date('now')`)
     }
 
-    return timestamp
+    return this.Knex.raw('NOW()')
   }
 
 

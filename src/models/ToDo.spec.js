@@ -6,17 +6,16 @@ const Q = require('q')
 //
 // Internal dependencies
 //
-import { Main } from './Main'
+import { ToDo } from './ToDo'
 
 //
 // Tests
 //
-describe('Model: Main', () => {
+describe('Model: ToDo', () => {
   let model
 
   beforeEach(() => {
-    model = new Main()
-    spyOn(model.Knex, 'raw').and.returnValue(Q.when({}))
+    model = new ToDo()
   })
 
   it('should be defined and inherit from BaseModelRDMS', () => {
@@ -24,8 +23,7 @@ describe('Model: Main', () => {
     expect(model.Knex).not.toBe(undefined)
   })
 
-  it('should expose doHealthcheck()', () => {
-    model.doHealthcheck()
-    expect(model.Knex.raw).toHaveBeenCalled()
+  it('should have the correct DB table name', () => {
+    expect(model.tableName).toBe('todos')
   })
 })

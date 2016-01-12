@@ -1,6 +1,13 @@
+//
+// External dependencies
+//
+const Purdy = require('purdy')
 let winston = require('winston')
-let Purdy = require('purdy')
-let loggingConfig = require('config').logging
+
+//
+// Internal dependencies
+//
+const loggingConfig = require('config').logging
 
 // Prepare transports
 let transports = []
