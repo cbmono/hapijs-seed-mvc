@@ -11,7 +11,7 @@ const config = require('config')
 //
 // Variables
 //
-var appSrc = 'src/**/*!(*.spec).js'
+var appSrc = 'src/**/*.js'
   , appInitSrc = 'index.js'
 
 //
@@ -24,15 +24,11 @@ gulp.task('jshint', () => gulp
   .pipe(jshint())
 )
 
-// Keep track of file changes
-gulp.task('watch', () => gulp
-  .watch(appSrc)
-)
-
 // Local node server
 gulp.task('nodemon', nodemon.bind({}, {
   script: appInitSrc,
   ext: 'js html',
+  ignore: [ 'src/**/*.spec.js', 'tests/', 'tasks/gulp.*.js' ],
   tasks: [ 'jshint' ],
   execMap: {
     js: 'node --debug=' + config.get('node.debugPort', 5858)

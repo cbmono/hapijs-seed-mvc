@@ -26,10 +26,9 @@ glob.sync( gulpTasksSrc )
 //
 //  * Lint Javascript files
 //  * Run local node server
-//  * Watch file changes
+//  * Resatart on file changes
 //
 gulp.task('default', [
   'jshint',
   'nodemon'
-  // 'watch'
 ])
