@@ -17,7 +17,7 @@ describe('Routes: Main', () => {
   it('should expose GET /{param*}', () => {
     let path = '/{param*}'
       , method = 'GET'
-      , route = _.findWhere(routes.default, { path: path, method: method })
+      , route = _.find(routes.default, { path: path, method: method })
 
     expect(route.path).toBe(path)
     expect(route.method).toBe(method)

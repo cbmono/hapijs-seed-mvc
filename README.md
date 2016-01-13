@@ -157,7 +157,7 @@ forever start index.js
 
 ## Others
 
-* lodash is available across the whole app
+* [lodash] is available across the whole app
   ```js
   _.keys({ foo: 'bar' })
   ```
@@ -183,3 +183,4 @@ forever start index.js
 [forever]:  https://github.com/foreverjs/forever
 [winston]:  https://www.npmjs.com/package/winston
 [purdy]:    https://www.npmjs.com/package/purdy
+[lodash]:   https://lodash.com/

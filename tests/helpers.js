@@ -24,7 +24,7 @@ export function assertRoutes( routes,
                               expectedMethod,
                               validateParams = false,
                               validatePayload = false) {
-  let route = _.findWhere(routes, { path: expectedPath, method: expectedMethod })
+  let route = _.find(routes, { path: expectedPath, method: expectedMethod })
 
   expect(route.path).toBe(expectedPath)
   expect(route.method).toBe(expectedMethod)

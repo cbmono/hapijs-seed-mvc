@@ -201,7 +201,7 @@ describe(`API Test: ToDo's`, () => {
       .then(
         (response) => {
           let body = JSON.parse(response.body)
-          let createdEntry = _.findWhere(body, { id: createdId })
+          let createdEntry = _.find(body, { id: createdId })
 
           expect(response.statusCode).toBe(200)
           expect(body.length).toBeGreaterThan(0)
