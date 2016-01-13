@@ -1,14 +1,9 @@
-//
-// Internal dependencies
-//
 import { BaseModelRDMS } from './BaseModel.RDMS'
 
 
-/******************************************
- *
- * ToDo's
- *
- ******************************************/
+//
+// ToDo's
+//
 export class ToDo extends BaseModelRDMS {
 
   /**

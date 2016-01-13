@@ -1,15 +1,10 @@
-//
-// Internal dependencies
-//
 import { ToDo } from '../models/ToDo'
 import { BaseController } from './base.controller'
 
 
-/******************************************
- *
- * Controller for ToDo lists
- *
- ******************************************/
+//
+// Controller for ToDo lists
+//
 export class ToDosController extends BaseController {
 
   /**
@@ -38,7 +33,7 @@ export class ToDosController extends BaseController {
     let id = request.params.id
 
     this.ToDo.findById(id)
-      .then((response) => this.replyOnResonse(response, reply))
+      .then((response) => this.replyOnResponse(response, reply))
       .catch((err) => reply(this.Boom.wrap(err)))
   }
 
@@ -61,7 +56,7 @@ export class ToDosController extends BaseController {
       , data = request.payload
 
     this.ToDo.update(id, data)
-      .then((response) => this.replyOnResonse(response, reply))
+      .then((response) => this.replyOnResponse(response, reply))
       .catch((err) => reply(this.Boom.wrap(err)))
   }
 
@@ -72,7 +67,7 @@ export class ToDosController extends BaseController {
     let id = request.params.id
 
     this.ToDo.del(id)
-      .then((response) => this.replyOnResonse(response, reply))
+      .then((response) => this.replyOnResponse(response, reply))
       .catch((err) => reply(this.Boom.wrap(err)))
   }
 }

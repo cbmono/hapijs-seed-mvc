@@ -1,7 +1,5 @@
-//
-// Internal dependencies
-//
 import { BaseRoutes } from './base.routes'
+
 
 //
 // Tests

@@ -1,26 +1,17 @@
-//
-// External dependencies
-//
-const Purdy = require('purdy')
-let winston = require('winston')
+import config  from 'config'
+import Purdy  from 'purdy'
+import winston  from 'winston'
 
-//
-// Internal dependencies
-//
-const loggingConfig = require('config').logging
-
-// Prepare transports
+// Config
+const loggingConfig = config.logging
 let transports = []
 
 if (loggingConfig.console) {
   transports.push(new winston.transports.Console(loggingConfig.console))
 }
 
-// Setup winston
-winston = new winston.Logger({
+// Export
+export default new winston.Logger({
   transports: transports,
   rewriters: [ ((level, msg, meta) => Purdy(meta)) ]
 })
-
-// Export
-module.exports = winston

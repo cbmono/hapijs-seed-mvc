@@ -1,11 +1,14 @@
-//
-// External dependencies
-//
-const _ = require('lodash')
+import _  from 'lodash'
+import { default as log } from '../src/logger'
+
 
 //
-// Helper methods for tests
+// Helper methods/plugins for tests
 //
+
+// Global dependencies (available across all tests)
+GLOBAL._ = _
+GLOBAL.log = log
 
 /**
  * Helper method for routes

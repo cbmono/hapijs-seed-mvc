@@ -1,12 +1,4 @@
-//
-// Internal dependencies
-//
-const dbConfig = require('config').get('database')
+import config  from 'config'
+import knex  from 'knex'
 
-//
-// External dependencies
-//
-const knex = require('knex')(dbConfig)
-
-// Export
-module.exports = knex
+export default knex(config.get('database'))

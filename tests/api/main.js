@@ -1,12 +1,8 @@
-//
-// External dependencies
-//
+import config  from 'config'
+import { default as log } from '../../src/logger'
+
 const rp = require('request-promise')
 
-//
-// Internal dependencies
-//
-const config = require('config')
 
 //
 // Tests

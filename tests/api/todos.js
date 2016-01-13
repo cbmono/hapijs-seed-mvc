@@ -1,13 +1,9 @@
-//
-// External dependencies
-//
-const _ = require('lodash')
+import config  from 'config'
+import _  from 'lodash'
+import { default as log } from '../../src/logger'
+
 const rp = require('request-promise')
 
-//
-// Internal dependencies
-//
-const config = require('config')
 
 //
 // Tests
@@ -44,7 +40,7 @@ describe(`API Test: ToDo's`, () => {
         done()
       })
       .catch((err) => {
-        console.error(err)
+        log.error(err)
         fail()
       })
     })
@@ -74,7 +70,7 @@ describe(`API Test: ToDo's`, () => {
           done()
         },
         (err) => {
-          console.error(err)
+          log.error(err)
           fail()
         }
       )
@@ -117,7 +113,7 @@ describe(`API Test: ToDo's`, () => {
           done()
         },
         (err) => {
-          console.error(err)
+          log.error(err)
           fail()
         }
       )
@@ -174,7 +170,7 @@ describe(`API Test: ToDo's`, () => {
           done()
         },
         (err) => {
-          console.error(err)
+          log.error(err)
           fail()
         }
       )
@@ -217,7 +213,7 @@ describe(`API Test: ToDo's`, () => {
           done()
         },
         (err) => {
-          console.error(err)
+          log.error(err)
           fail()
         }
       )
@@ -241,7 +237,7 @@ describe(`API Test: ToDo's`, () => {
           done()
         },
         (err) => {
-          console.error(err)
+          log.error(err)
           fail()
         }
       )

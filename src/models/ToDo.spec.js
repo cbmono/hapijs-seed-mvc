@@ -1,12 +1,6 @@
-//
-// External dependencies
-//
-const Q = require('q')
-
-//
-// Internal dependencies
-//
+import * as Q  from 'q'
 import { ToDo } from './ToDo'
+
 
 //
 // Tests

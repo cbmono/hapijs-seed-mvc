@@ -1,15 +1,10 @@
-//
-// Internal dependencies
-//
 import { MainController } from '../controllers/main.controller'
 import { BaseRoutes } from './base.routes'
 
 
-/******************************************
- *
- * Main (global) routes
- *
- ******************************************/
+//
+// Main (global) routes
+//
 let routes = new class MainRoutes extends BaseRoutes {
 
   /**
@@ -57,7 +52,6 @@ let routes = new class MainRoutes extends BaseRoutes {
     }
   }
 }
-
 
 //
 // Export public end-points

@@ -1,13 +1,6 @@
-//
-// External dependencies
-//
-const _ = require('lodash')
-
-//
-// Internal dependencies
-//
 import { assertRoutes } from '../../tests/helpers'
 import * as routes  from './main.routes'
+
 
 //
 // Tests

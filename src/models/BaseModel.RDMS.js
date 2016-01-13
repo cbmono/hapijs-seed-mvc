@@ -1,13 +1,5 @@
-//
-// External dependencies
-//
-const _ = require('lodash')
-
-//
-// Internal dependencies
-//
-const Knex = require('../db')
-const dbConfig = require('config').get('database')
+import config  from 'config'
+import Knex  from '../db'
 
 
 /******************************************
@@ -49,7 +41,7 @@ export class BaseModelRDMS {
     }
 
     this.Knex = Knex
-    this.dbConfig = dbConfig
+    this.dbConfig = config.get('database')
     this.tableName = tableName
     this.setTimestamps = setTimestamps
   }

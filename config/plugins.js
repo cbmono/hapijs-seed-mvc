@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = {
+export default {
   //
   // Options for good plugin (logging process)
   //

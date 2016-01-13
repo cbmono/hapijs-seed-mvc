@@ -1,14 +1,9 @@
-//
-// Internal dependencies
-//
 import { Main } from '../models/Main'
 
 
-/******************************************
- *
- * Controller for 'main'
- *
- ******************************************/
+//
+// Controller for 'main'
+//
 export class MainController {
 
   /**

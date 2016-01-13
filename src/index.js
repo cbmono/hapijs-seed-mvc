@@ -1,35 +1,23 @@
 'use strict'
 
-//
-// External dependencies
-//
-const fs = require('fs')
-const path = require('path')
-const Hapi = require('hapi')
+import Hapi  from 'Hapi'
+import config  from 'config'
+import fs  from 'fs'
+import _  from 'lodash'
+import path  from 'path'
+import { default as pluginsConfig } from '../config/plugins'
+import { default as log } from './logger'
 
-//
-// Load config settings
-//
-const config = require('config')
-const serverConfig = config.get('server')
 
-//
-// Internal dependencies
-//
-const pluginsConfig = require('../config/plugins')
+// Global dependencies (available across the whole App)
+GLOBAL._ = _
+GLOBAL.log = log
 
-// Make `log` available across the whole App
-GLOBAL.log = require('./logger')
-
-//
 // Setup the server
-//
 const server = new Hapi.Server()
-server.connection(serverConfig)
+server.connection(config.get('server'))
 
-//
 // Register hapi plugins
-//
 for (let plugin in pluginsConfig) {
   server.register(
     {
@@ -40,9 +28,7 @@ for (let plugin in pluginsConfig) {
   )
 }
 
-//
 // Require all routes found in the ./routes folder
-//
 let routesNormalizedPath = path.join(__dirname, 'routes')
 
 fs.readdirSync(routesNormalizedPath).forEach((file) => {

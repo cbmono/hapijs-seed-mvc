@@ -1,7 +1,4 @@
-//
-// External dependencies
-//
-const joi = require('joi')
+import * as joi  from 'joi'
 
 
 /******************************************

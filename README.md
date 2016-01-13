@@ -155,6 +155,25 @@ export NODE_ENV=staging
 forever start index.js
 ```
 
+## Others
+
+* lodash is available across the whole app
+  ```js
+  _.keys({ foo: 'bar' })
+  ```
+
+* Logging with [winston] and [purdy] is available across the whole app
+  ```js
+  log.debug('Debugging log', { foo: 'bar' })
+
+  log.info('Info output')
+
+  log.error('Error: ', err)
+  ```
+
+
+
+
 [hapi]:     http://hapijs.com/
 [knex.js]:  http://knexjs.org/
 [lout]:     https://github.com/hapijs/lout
@@ -162,3 +181,5 @@ forever start index.js
 [Jasmine2]: http://jasmine.github.io/2.4/introduction.html
 [Gulp]:     http://gulpjs.com/
 [forever]:  https://github.com/foreverjs/forever
+[winston]:  https://www.npmjs.com/package/winston
+[purdy]:    https://www.npmjs.com/package/purdy

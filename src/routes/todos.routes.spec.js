@@ -1,8 +1,6 @@
-//
-// Internal dependencies
-//
 import { assertRoutes } from '../../tests/helpers'
 import * as routes  from './todos.routes'
+
 
 //
 // Tests

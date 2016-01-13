@@ -21,7 +21,10 @@ var apiTestSrc = 'tests/api/**/*.js'
 // Mocha UnitTests
 gulp.task('jasmine:unit', () => gulp
   .src([ unitTestSrc ])
-  .pipe(jasmine({ verbose: true }))
+  .pipe(jasmine({
+    verbose: true,
+    includeStackTrace: true,
+  }))
   .on('error', (err) => {
     gutil.log(gutil.colors.red(`Error running UnitTest's: `), err)
     process.exit(1)
@@ -31,7 +34,10 @@ gulp.task('jasmine:unit', () => gulp
 // Mocha Integration tests
 gulp.task('jasmine:api', () => gulp
   .src([ apiTestSrc ])
-  .pipe(jasmine({ verbose: true }))
+  .pipe(jasmine({
+    verbose: true,
+    includeStackTrace: true,
+  }))
   .on('error', (err) => {
     gutil.log(gutil.colors.red('Error running API Tests: '), err)
     process.exit(1)

@@ -1,7 +1,5 @@
-//
-// Internal dependencies
-//
 import { BaseController } from './base.controller'
+
 
 //
 // Tests
@@ -24,25 +22,25 @@ describe('Controller: Base', () => {
     expect(controller.notFoundMsg).toBe(notFoundMsg)
   })
 
-  describe('replyOnResonse()', () => {
+  describe('replyOnResponse()', () => {
     it('should accept an array as response', () => {
       let response = [{ msg: 'hello' }]
 
-      controller.replyOnResonse(response, foo.reply)
+      controller.replyOnResponse(response, foo.reply)
       expect(foo.reply).toHaveBeenCalledWith(response)
     })
 
     it('should accept a positive integer as response', () => {
       let response = 1
 
-      controller.replyOnResonse(response, foo.reply)
+      controller.replyOnResponse(response, foo.reply)
       expect(foo.reply).toHaveBeenCalledWith(response)
     })
 
     it('should return Not Found', () => {
       let response = 'invalid response'
 
-      controller.replyOnResonse(response, foo.reply)
+      controller.replyOnResponse(response, foo.reply)
       expect(foo.reply).toHaveBeenCalled()
       expect(controller.Boom.notFound).toHaveBeenCalledWith(notFoundMsg)
     })
