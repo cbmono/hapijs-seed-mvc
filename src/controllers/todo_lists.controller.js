@@ -77,7 +77,7 @@ export class ToDoListsController extends BaseController {
   }
 
   /**
-   * Delente a ToDo list
+   * Delete a ToDo list
    */
   remove(request, reply) {
     let id = request.params.id
