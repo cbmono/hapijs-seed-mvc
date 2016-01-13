@@ -13,7 +13,7 @@ module.exports = {
     //   port: 3306,
     //   user: 'root',
     //   password: ''
-    // },
+    // }
 
     //
     // MariaDB
@@ -24,7 +24,7 @@ module.exports = {
     //   port: 3306,
     //   user: 'root',
     //   password: ''
-    // },
+    // }
 
     //
     // Postgres
@@ -35,7 +35,7 @@ module.exports = {
     //   port: 5432,
     //   user: 'root',
     //   password: ''
-    // },
+    // }
 
     //
     // SQLite3
@@ -44,7 +44,7 @@ module.exports = {
     // connection: {
     //   filename: './my_SQLite3.db'
     // }
-  }
+  },
 
   //
   // Logging

@@ -16,7 +16,9 @@ export class ToDoListsController extends BaseController {
    * Constructor
    */
   constructor() {
-    super()
+    let notFoundMsg = `ToDo List not found`
+
+    super(notFoundMsg)
     this.ToDoList = new ToDoList()
   }
 
@@ -36,14 +38,7 @@ export class ToDoListsController extends BaseController {
     let id = request.params.id
 
     this.ToDoList.findById(id)
-      .then((response) => {
-        if ((Array.isArray(response) && response.length) || response > 0) {
-          reply(response)
-          return
-        }
-
-        reply(this.Boom.notFound(`ToDo List id:${ id } not found`))
-      })
+      .then((response) => this.replyOnResonse(response, reply))
       .catch((err) => reply(this.Boom.wrap(err)))
   }
 
@@ -54,14 +49,7 @@ export class ToDoListsController extends BaseController {
     let id = request.params.id
 
     this.ToDoList.findByIdWithTodos(id)
-      .then((response) => {
-        if ((Array.isArray(response) && response.length) || response > 0) {
-          reply(response)
-          return
-        }
-
-        reply(this.Boom.notFound(`ToDo List id:${ id } not found`))
-      })
+      .then((response) => this.replyOnResonse(response, reply))
       .catch((err) => reply(this.Boom.wrap(err)))
   }
 
@@ -84,14 +72,7 @@ export class ToDoListsController extends BaseController {
       , data = request.payload
 
     this.ToDoList.update(id, data)
-      .then((response) => {
-        if ((Array.isArray(response) && response.length) || response > 0) {
-          reply(response)
-          return
-        }
-
-        reply(this.Boom.notFound(`ToDo List id:${ id } not found`))
-      })
+      .then((response) => this.replyOnResonse(response, reply))
       .catch((err) => reply(this.Boom.wrap(err)))
   }
 
@@ -102,14 +83,7 @@ export class ToDoListsController extends BaseController {
     let id = request.params.id
 
     this.ToDoList.del(id)
-      .then((response) => {
-        if ((Array.isArray(response) && response.length) || response > 0) {
-          reply(response)
-          return
-        }
-
-        reply(this.Boom.notFound(`ToDo List id:${ id } not found`))
-      })
+      .then((response) => this.replyOnResonse(response, reply))
       .catch((err) => reply(this.Boom.wrap(err)))
   }
 }

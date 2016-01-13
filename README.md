@@ -67,6 +67,8 @@ The seed contains a sample [hapi] application (ToDo Lists) and is preconfigured 
 
   (if `NODE_ENV` wasn't exported, then `local` is going to be used)
 
+7. Go to: [http://localhost:3000](http://localhost:3000)
+
 
 ## Database Migration and Seed
 
@@ -115,7 +117,7 @@ gulp test:unit
 
 ### API Tests
 
-API Tests are stored in `/tests/api` and are meant to test the RESTful end-points of your App. For instance: `curl localhost:3000/healthcheck`
+API Tests are stored in `/tests/api` and are meant to test the RESTful end-points of your App.
 
 In order to test the server responses you have to start the server in a new terminal/tab:
 ```
@@ -132,7 +134,7 @@ gulp test:api
 
 The auto-generated API documentation is provided by [lout] and it's based on the configuration of every route (`/routes`).
 
-http://localhost:3000/docs
+[http://localhost:3000/docs](http://localhost:3000/docs)
 
 
 ## Remote debug setup
