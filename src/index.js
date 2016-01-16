@@ -1,8 +1,8 @@
 'use strict'
 
-import Hapi  from 'hapi'
 import config  from 'config'
 import fs  from 'fs'
+import Hapi  from 'hapi'
 import _  from 'lodash'
 import path  from 'path'
 import { default as pluginsConfig } from '../config/plugins'
