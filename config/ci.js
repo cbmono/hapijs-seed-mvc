@@ -1,13 +1,12 @@
 //
-// If you change this file to local.coffee,
-// it will be the last one to be loaded
-// and the values will overwrite all the others.
+// This config file is used for Continues Integration
+//
+// NOTE: don't forget to export `ci` as NODE_ENV:
+//
+//   $ export NODE_ENV=ci
 //
 module.exports = {
-  //
-  // Database
-  // DB name is defined in default.coffee
-  //
+
   database: {
     //
     // Postgres

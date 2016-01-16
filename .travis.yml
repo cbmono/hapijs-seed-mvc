@@ -11,9 +11,9 @@ services:
 before_script:
   - psql -c 'create database todo;' -U postgres
   - npm install -g gulp
+  - "export NODE_ENV=ci"
   - gulp db:migrate
   - gulp db:seed
-  - "export NODE_ENV=ci"
   - gulp
   - sleep 5
 
