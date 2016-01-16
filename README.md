@@ -1,4 +1,6 @@
 # [hapi] Seed Project - MVC / RDMS
+[![Dependency Status](https://david-dm.org/cbmono/hapijs-seed-mvc.svg)](https://david-dm.org/cbmono/hapijs-seed-mvc/master)
+[![Dependency Status](https://david-dm.org/cbmono/hapijs-seed-mvc/dev-status.svg)](https://david-dm.org/cbmono/hapijs-seed-mvc/master#info=devDependencies)
 
 This project is an application skeleton for a typical [hapi] RESTful API. You can use it to quickly bootstrap your [hapi] API projects and be ready to code the core of your App within minutes.
 
