@@ -1,6 +1,6 @@
 'use strict'
 
-import Hapi  from 'Hapi'
+import Hapi  from 'hapi'
 import config  from 'config'
 import fs  from 'fs'
 import _  from 'lodash'

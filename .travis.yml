@@ -15,6 +15,5 @@ before_script:
   - gulp db:migrate
   - gulp db:seed
   - gulp
-  - sleep 5
 
 script: npm run test:unit
