@@ -1,5 +1,5 @@
 {
-  "name": "hapijs-mvc-seed-es6",
+  "name": "hapijs-seed-mvc",
   "version": "1.0.0",
   "description": "hapi Seed Project - MVC / RDMS",
   "author": "Claudio Bredfeldt <claudio@cbmono.de>",

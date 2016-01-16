@@ -3,12 +3,18 @@ node_js:
   - "4.1"
 
 addons:
-  mariadb: '10.0'
-  postgresql: "9.3"
+  postgresql: "9.4"
 
 services:
   - postgresql
-  - mysql
 
 before_script:
   - psql -c 'create database todos;' -U postgres
+  - npm install -g gulp
+  - gulp db:migrate
+  - gulp db:seed
+  - "export NODE_ENV=ci"
+  - gulp
+  - sleep 5
+
+script: npm run test:unit
