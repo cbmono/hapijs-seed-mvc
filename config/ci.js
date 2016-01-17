@@ -13,10 +13,10 @@ module.exports = {
     //
     client: 'pg',
     connection: {
-      database: 'todo',
+      database: 'circle_test',
       host: 'localhost',
       port: 5432,
-      user: 'postgres',
+      user: 'ubuntu',
       password: ''
     }
   },

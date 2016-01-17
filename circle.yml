@@ -1,0 +1,13 @@
+machine:
+  node:
+    version: 5.3
+  environment:
+    NODE_ENV: ci
+
+test:
+  override:
+    - gulp db:migrate
+    - gulp db:seed
+    - gulp
+    - curl --retry 10 --retry-delay 5 -v http://localhost:3000/healthcheck
+    - npm test
