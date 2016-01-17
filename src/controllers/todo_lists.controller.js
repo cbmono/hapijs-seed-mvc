@@ -1,4 +1,4 @@
-import { ToDoList } from '../models/ToDoList'
+import ToDoList  from '../models/ToDoList'
 import { BaseController } from './base.controller'
 
 

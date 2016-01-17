@@ -4,7 +4,7 @@ import { ToDo } from './ToDo'
 //
 // ToDo Lists
 //
-export class ToDoList extends BaseModelRDMS {
+export default class ToDoList extends BaseModelRDMS {
 
   /**
    * Constructor
