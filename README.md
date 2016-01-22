@@ -1,4 +1,6 @@
-# [hapi] Seed Project - MVC / RDMS
+# [hapi] Seed Project - MVC
+[![Circle CI](https://circleci.com/gh/cbmono/hapijs-seed-mvc.svg?style=shield)](https://circleci.com/gh/cbmono/hapijs-seed-mvc)
+[![Travis CI](https://travis-ci.org/cbmono/hapijs-seed-mvc.svg?branch=master)](https://travis-ci.org/cbmono/hapijs-seed-mvc)
 [![Dependency Status](https://david-dm.org/cbmono/hapijs-seed-mvc.svg)](https://david-dm.org/cbmono/hapijs-seed-mvc/master)
 [![Dependency Status](https://david-dm.org/cbmono/hapijs-seed-mvc/dev-status.svg)](https://david-dm.org/cbmono/hapijs-seed-mvc/master#info=devDependencies)
 
@@ -14,6 +16,7 @@ The seed contains a sample [hapi] application (ToDo Lists) and is preconfigured 
   - SQLite3
   - Schema Migrations and Seeding
 - Pre-configured environments (_local_, _dev_, _staging_, _production_)
+- Pre-configured CI settings ([Circle CI] / [Travis CI])
 - Powerful payload validations via [joi]
 - Auto-generated documentation ([lout])
 - Unit & API/REST tests examples ([Jasmine2])
@@ -38,7 +41,7 @@ The seed contains a sample [hapi] application (ToDo Lists) and is preconfigured 
 
 ## Getting started
 
-1. Fork this repo (top right button) and clone it form your account (replace `YOUR-USERNAME`)
+1. Fork this repo (top right button) and clone it from your account (replace `YOUR-USERNAME`)
   ```
   git clone https://github.com/YOUR-USERNAME/hapijs-seed-mvc.git
   cd hapijs-seed-mvc
@@ -176,13 +179,15 @@ forever start index.js
 
 
 
-[hapi]:     http://hapijs.com/
-[knex.js]:  http://knexjs.org/
-[lout]:     https://github.com/hapijs/lout
-[joi]:      https://github.com/hapijs/joi
-[Jasmine2]: http://jasmine.github.io/2.4/introduction.html
-[Gulp]:     http://gulpjs.com/
-[forever]:  https://github.com/foreverjs/forever
-[winston]:  https://www.npmjs.com/package/winston
-[purdy]:    https://www.npmjs.com/package/purdy
-[lodash]:   https://lodash.com/
+[hapi]:       http://hapijs.com/
+[knex.js]:    http://knexjs.org/
+[lout]:       https://github.com/hapijs/lout
+[joi]:        https://github.com/hapijs/joi
+[Jasmine2]:   http://jasmine.github.io/2.4/introduction.html
+[Gulp]:       http://gulpjs.com/
+[forever]:    https://github.com/foreverjs/forever
+[winston]:    https://www.npmjs.com/package/winston
+[purdy]:      https://www.npmjs.com/package/purdy
+[lodash]:     https://lodash.com/
+[Circle CI]:  https://circleci.com
+[Travis CI]:  https://travis-ci.org

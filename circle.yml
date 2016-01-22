@@ -1,13 +1,15 @@
 machine:
   node:
-    version: 5.3
+    version: 5.5
   environment:
-    NODE_ENV: ci
+    NODE_ENV: ci-circle
 
 test:
   override:
     - gulp db:migrate
     - gulp db:seed
-    - gulp
-    - curl --retry 10 --retry-delay 5 -v http://localhost:3000/healthcheck
+    - gulp:
+        background: true
+    - sleep 10
+    - curl --retry 10 --retry-delay 5 -v 127.0.0.1:3000/healthcheck
     - npm test

@@ -1,10 +1,11 @@
 import { BaseModelRDMS } from './BaseModel.RDMS'
 import { ToDo } from './ToDo'
 
+
 //
 // ToDo Lists
 //
-export default class ToDoList extends BaseModelRDMS {
+export class ToDoList extends BaseModelRDMS {
 
   /**
    * Constructor

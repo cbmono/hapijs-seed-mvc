@@ -3,7 +3,7 @@
 //
 // NOTE: don't forget to export `ci` as NODE_ENV:
 //
-//   $ export NODE_ENV=ci
+//   $ export NODE_ENV=ci-circle
 //
 module.exports = {
 

@@ -1,5 +1,4 @@
 'use strict'
 
-require('babel-polyfill')
-require('babel-register')({ ignore: false })
+require('babel-core/register')
 require('./src')
