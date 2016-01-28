@@ -1,6 +1,7 @@
 # [hapi] Seed Project - MVC
 [![Circle CI](https://circleci.com/gh/cbmono/hapijs-seed-mvc.svg?style=shield)](https://circleci.com/gh/cbmono/hapijs-seed-mvc)
 [![Travis CI](https://travis-ci.org/cbmono/hapijs-seed-mvc.svg?branch=master)](https://travis-ci.org/cbmono/hapijs-seed-mvc)
+[![codecov.io](https://codecov.io/github/cbmono/hapijs-seed-mvc/coverage.svg?branch=master)](https://codecov.io/github/cbmono/hapijs-seed-mvc?branch=master)
 [![Dependency Status](https://david-dm.org/cbmono/hapijs-seed-mvc.svg)](https://david-dm.org/cbmono/hapijs-seed-mvc/master)
 [![Dependency Status](https://david-dm.org/cbmono/hapijs-seed-mvc/dev-status.svg)](https://david-dm.org/cbmono/hapijs-seed-mvc/master#info=devDependencies)
 
@@ -20,6 +21,7 @@ The seed contains a sample [hapi] application (ToDo Lists) and is preconfigured 
 - Powerful payload validations via [joi]
 - Auto-generated documentation ([lout])
 - Unit & API/REST tests examples ([Jasmine2])
+- Test Coverage ([istanbul])
 - RESTful outputs
 - Improved Logging and Remote debugging
 - Healthcheck end-point
@@ -49,6 +51,7 @@ The seed contains a sample [hapi] application (ToDo Lists) and is preconfigured 
 
 2. Install the dependencies
   ```
+  npm install gulp -g
   npm install
   ```
 
@@ -106,7 +109,7 @@ gulp db:seed
 
 ## Tests
 
-This project has to kind of tests: UnitTest and API Tests. For both [Jasmine2] is being used. If you want to execute both kind of tests at the same time, you can run:
+This project has two kind of tests: _UnitTest_ and _API Tests_. For both [Jasmine2] is being used. If you want to execute both kind of tests (including Test Coverage), run:
 ```
 gulp test
 ```
@@ -122,7 +125,7 @@ gulp test:unit
 
 ### API Tests
 
-API Tests are stored in `/tests/api` and are meant to test the RESTful end-points of your App.
+API Tests are saved in `/tests/api` and are meant to test the RESTful end-points of your App.
 
 In order to test the server responses you have to start the server in a new terminal/tab:
 ```
@@ -130,10 +133,23 @@ cd /path/to/your/project
 gulp
 ```
 
-Then execute your API Tests by running:
+Then execute your API Tests:
 ```
 gulp test:api
 ```
+
+### Test Coverage
+
+Test Coverage reports are generated through [istanbul]. The default threshold to pass the test coverage is set at _90%_:
+```
+gulp test:coverage
+```
+
+Full reports can be found in `./tests/coverage`. Or just open `./tests/coverage/lcov-report` in your browser:
+```
+open tests/coverage/lcov-report/index.html
+```
+
 
 ## API Documentation
 
@@ -191,3 +207,4 @@ forever start index.js
 [lodash]:     https://lodash.com/
 [Circle CI]:  https://circleci.com
 [Travis CI]:  https://travis-ci.org
+[istanbul]:   https://gotwarlost.github.io/istanbul

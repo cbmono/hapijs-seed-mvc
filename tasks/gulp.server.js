@@ -14,6 +14,12 @@ const config = require('config')
 //
 var appSrc = 'src/**/*.js'
   , appInitSrc = 'index.js'
+  , ignoreSrc = [
+    'coverage',
+    'src/**/*.spec.js',
+    'tasks/gulp.*.js',
+    'tests/',
+  ]
 
 //
 // Tasks
@@ -30,7 +36,7 @@ gulp.task('nodemon', () => {
   nodemon({
     script: appInitSrc,
     ext: 'js html',
-    ignore: [ 'src/**/*.spec.js', 'tests/', 'tasks/gulp.*.js' ],
+    ignore: ignoreSrc,
     tasks: [ 'jshint' ],
     execMap: {
       js: 'node --debug=' + config.get('node.debugPort', 5858)
@@ -40,7 +46,7 @@ gulp.task('nodemon', () => {
     gutil.log(gutil.colors.red(`Local server crashed (nodemon): `))
 
     // Exit if running on CI environment
-    if (process.env.NODE_ENV === 'ci') {
+    if (process.env.NODE_ENV.match(/^ci-/i).length) {
       process.exit(1)
     }
   })
