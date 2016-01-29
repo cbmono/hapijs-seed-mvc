@@ -22,6 +22,12 @@ describe('Controller: Base', () => {
     expect(controller.notFoundMsg).toBe(notFoundMsg)
   })
 
+  it('should have empty @notFoundMsg', () => {
+    let ctrl = new BaseController()
+
+    expect(ctrl.notFoundMsg).toBe('')
+  })
+
   describe('replyOnResponse()', () => {
     it('should accept an array as response', () => {
       let response = [{ msg: 'hello' }]
