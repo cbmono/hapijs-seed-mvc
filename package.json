@@ -45,7 +45,7 @@
     "babel-register": "^6.4.3",
     "glob": "^6.0.4",
     "gulp": "^3.9.0",
-    "gulp-babel": "^6.1.1",
+    "gulp-babel": "^6.1.2",
     "gulp-babel-istanbul": "^0.11.0",
     "gulp-codecov.io": "^1.0.1",
     "gulp-jasmine": "^2.2.1",
