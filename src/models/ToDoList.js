@@ -24,7 +24,7 @@ export class ToDoList extends BaseModelRDMS {
    * @return {promise}
    *         Contains an array with the ToDo List object and its ToDo's
    */
-  findByIdWithTodos(id) {
+  findByIdWithToDos(id) {
     return this.findById(id).then((response) => {
       if (response.length) {
         return this.ToDo.findBy('todo_list_id', id).then((todos) => {

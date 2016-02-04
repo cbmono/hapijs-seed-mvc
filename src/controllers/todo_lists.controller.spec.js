@@ -13,7 +13,7 @@ describe('Controller: ToDo Lists', () => {
 
     spyOn(controller.ToDoList, 'findAll').and.returnValue(Q.when({}))
     spyOn(controller.ToDoList, 'findById').and.returnValue(Q.when({}))
-    spyOn(controller.ToDoList, 'findByIdWithTodos').and.returnValue(Q.when({}))
+    spyOn(controller.ToDoList, 'findByIdWithToDos').and.returnValue(Q.when({}))
     spyOn(controller.ToDoList, 'save').and.returnValue(Q.when({}))
     spyOn(controller.ToDoList, 'update').and.returnValue(Q.when({}))
     spyOn(controller.ToDoList, 'del').and.returnValue(Q.when({}))
@@ -42,7 +42,7 @@ describe('Controller: ToDo Lists', () => {
       , request = { params: { id: id }}
 
     controller.viewAll(request)
-    expect(controller.ToDoList.findByIdWithTodos).toHaveBeenCalledWith(id)
+    expect(controller.ToDoList.findByIdWithToDos).toHaveBeenCalledWith(id)
   })
 
   it('should expose create()', () => {

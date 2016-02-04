@@ -43,7 +43,7 @@ export class ToDoListsController extends BaseController {
   viewAll(request, reply) {
     let id = request.params.id
 
-    this.ToDoList.findByIdWithTodos(id)
+    this.ToDoList.findByIdWithToDos(id)
       .then((response) => this.replyOnResponse(response, reply))
       .catch((err) => reply(this.Boom.wrap(err)))
   }
