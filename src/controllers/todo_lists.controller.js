@@ -22,7 +22,7 @@ export class ToDoListsController extends BaseController {
    */
   index(request, reply) {
     this.ToDoList.findAll()
-      .then(reply)
+      .then((response) => reply(response))
       .catch((err) => reply(this.Boom.wrap(err)))
   }
 
@@ -55,7 +55,7 @@ export class ToDoListsController extends BaseController {
     let data = request.payload
 
     this.ToDoList.save(data)
-      .then(reply)
+      .then((response) => reply(response))
       .catch((err) => reply(this.Boom.wrap(err)))
   }
 

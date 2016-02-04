@@ -22,7 +22,7 @@ export class ToDosController extends BaseController {
    */
   index(request, reply) {
     this.ToDo.findAll()
-      .then(reply)
+      .then((response) => reply(response))
       .catch((err) => reply(this.Boom.wrap(err)))
   }
 
@@ -44,7 +44,7 @@ export class ToDosController extends BaseController {
     let data = request.payload
 
     this.ToDo.save(data)
-      .then(reply)
+      .then((response) => reply(response))
       .catch((err) => reply(this.Boom.wrap(err)))
   }
 

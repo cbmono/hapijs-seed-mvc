@@ -10,7 +10,6 @@ describe('Model: Main', () => {
 
   beforeEach(() => {
     model = new Main()
-    spyOn(model.Knex, 'raw').and.returnValue(Q.when({}))
   })
 
   it('should be defined and inherit from BaseModelRDMS', () => {
@@ -18,8 +17,26 @@ describe('Model: Main', () => {
     expect(model.Knex).not.toBe(undefined)
   })
 
-  it('should expose doHealthcheck()', () => {
-    model.doHealthcheck()
-    expect(model.Knex.raw).toHaveBeenCalled()
+  it('should expose doHealthcheck()', (done) => {
+    spyOn(model.Knex, 'raw').and.returnValue(Q.when({}))
+
+    model.doHealthcheck().then((response) => {
+      expect(model.Knex.raw).toHaveBeenCalledWith('SELECT 1+1 AS result')
+      expect(response.ping).toBe('pong')
+      expect(response.uptime).toBeDefined()
+      expect(response.timestamp).toBeDefined()
+      expect(response.database.healthy).toBe(true)
+      done()
+    })
+  })
+
+  it('should inform when the DB is not healthy', (done) => {
+    spyOn(model.Knex, 'raw').and.returnValue(Q.reject({}))
+
+    model.doHealthcheck().then((response) => {
+      expect(model.Knex.raw).toHaveBeenCalled()
+      expect(response.database.healthy).toBe(false)
+      done()
+    })
   })
 })

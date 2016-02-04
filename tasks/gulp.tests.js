@@ -15,7 +15,12 @@ const mergeStream = require('merge-stream')
 //
 // Variables
 //
-var appSrc = 'src/**/*!(.spec).js'
+var appSrc = [
+  'src/**/*!(.spec).js',
+  '!src/**/*.spec.js',
+  '!src/logger.js',
+  '!src/db.js'
+]
 var unitTestSrc = 'src/**/*.spec.js'
 var apiTestSrc = 'tests/api/**/*.js'
 var coverageSrc = './tests/coverage'
@@ -55,7 +60,7 @@ gulp.task('jasmine:api', () => gulp
 
 // Tests Coverage (with Jasmine)
 gulp.task('test:coverage', () => mergeStream(
-    gulp.src([ appSrc, '!' + unitTestSrc ]).pipe(istanbul()),
+    gulp.src(appSrc).pipe(istanbul()),
     gulp.src([ unitTestSrc ]).pipe(babel())
   )
   .pipe(istanbul.hookRequire())
