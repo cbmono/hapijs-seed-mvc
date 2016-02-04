@@ -142,7 +142,7 @@ gulp test:api
 
 ### Test Coverage
 
-Test Coverage reports are generated through [istanbul]. The default threshold to pass the test coverage is set at _90%_:
+Test Coverage reports are generated through [istanbul]. The default threshold to pass the test coverage is set at [90%](https://github.com/cbmono/hapijs-seed-mvc/blob/master/tasks/gulp.tests.js#L71):
 ```
 gulp test:coverage
 ```
