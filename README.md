@@ -7,6 +7,8 @@
 
 This project is an application skeleton for a typical [hapi] RESTful API. You can use it to quickly bootstrap your [hapi] API projects and be ready to code the core of your App within minutes.
 
+![image](https://cloud.githubusercontent.com/assets/352146/12811440/baeb4f62-cb2c-11e5-97e4-5236d99b493f.png)
+
 The seed contains a sample [hapi] application (ToDo Lists) and is preconfigured to install the [hapi] framework and a bunch of development and testing tools for instant API development gratification. You will get all this by just running `npm install`:
 
 - ES6 ToDo List example
