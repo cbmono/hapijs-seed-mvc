@@ -10,9 +10,9 @@ const rp = require('request-promise')
 //
 describe(`API Test: ToDo's`, () => {
   /**
-   * NOTE: follow this order of API Tests
+   * NOTE: follow this order for API Tests
    *
-   * CREATE -> UPDATE -> VIEW (ALL) -> DELETE -> Done!
+   * CREATE -> UPDATE -> VIEW -> VIEW ALL -> DELETE -> Done!
    */
 
   let todoListId
