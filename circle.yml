@@ -10,6 +10,6 @@ test:
     - gulp db:seed
     - gulp:
         background: true
-    - sleep 12
+    - sleep 15
     - curl --retry 10 --retry-delay 5 -v 127.0.0.1:3000/healthcheck
     - npm test
