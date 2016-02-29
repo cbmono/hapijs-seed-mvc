@@ -41,7 +41,7 @@
     "winston": "^2.1.1"
   },
   "devDependencies": {
-    "babel-istanbul": "^0.6.0",
+    "babel-istanbul": "^0.6.1",
     "babel-register": "^6.5.1",
     "glob": "^7.0.0",
     "gulp": "^3.9.0",
