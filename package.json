@@ -46,7 +46,7 @@
     "glob": "^7.0.0",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.2",
-    "gulp-babel-istanbul": "^0.12.0",
+    "gulp-babel-istanbul": "^1.0.0",
     "gulp-codecov.io": "^1.0.1",
     "gulp-jasmine": "^2.2.1",
     "gulp-jshint": "^2.0.0",
