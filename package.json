@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "babel-istanbul": "^0.6.1",
-    "babel-register": "^6.5.1",
+    "babel-register": "^6.6.0",
     "glob": "^7.0.0",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.2",
