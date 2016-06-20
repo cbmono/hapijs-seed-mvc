@@ -23,7 +23,7 @@
     "boom": "^3.1.1",
     "config": "^1.17.1",
     "good": "^6.4.0",
-    "good-console": "^5.3.0",
+    "good-console": "^6.0.0",
     "good-file": "^5.1.1",
     "hapi": "^13.0.0",
     "inert": "^3.2.0",
