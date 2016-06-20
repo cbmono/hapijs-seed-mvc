@@ -26,7 +26,7 @@ let routes = new class TodoListsRoutes extends BaseRoutes {
     // Overwrite attributes
     route.path += '/todos'
     route.config.description = `Retrieve a ToDo list and all its ToDo's`
-    route.config.handler = this.controller.viewAll.bind(this.controller)
+    route.handler = this.controller.viewAll.bind(this.controller)
 
     return route
   }

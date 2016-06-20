@@ -36,12 +36,25 @@ describe(`Routes: Base`, () => {
     }
   })
 
+  it('should throw on empty controller handler', () => {
+    try {
+      let emptyCtrl = new class TempController {}
+      
+      routes = new BaseRoutes(emptyCtrl)
+      routes.index()
+    }
+    catch (exc) {
+      expect(exc.name).toBe('Error')
+      expect(exc.message).toBe('BaseRoute: controller handler is undefined')
+    }
+  })
+
   it('should expose index()', () => {
     let options = routes.index()
 
     expect(options.method).toBe('GET')
     expect(options.path).toBe(routes.endpoint)
-    expect(options.config.handler).not.toBe(undefined)
+    expect(options.handler).not.toBe(undefined)
   })
 
   it('should expose view()', () => {
@@ -49,7 +62,7 @@ describe(`Routes: Base`, () => {
 
     expect(options.method).toBe('GET')
     expect(options.path).toBe(routes.endpoint + '/{id}')
-    expect(options.config.handler).not.toBe(undefined)
+    expect(options.handler).not.toBe(undefined)
     expect(options.config.validate.params.id).not.toBe(undefined)
   })
 
@@ -58,7 +71,7 @@ describe(`Routes: Base`, () => {
 
     expect(options.method).toBe('POST')
     expect(options.path).toBe(routes.endpoint)
-    expect(options.config.handler).not.toBe(undefined)
+    expect(options.handler).not.toBe(undefined)
     expect(options.config.validate).not.toBe(undefined)
   })
 
@@ -67,7 +80,7 @@ describe(`Routes: Base`, () => {
 
     expect(options.method).toBe('PUT')
     expect(options.path).toBe(routes.endpoint + '/{id}')
-    expect(options.config.handler).not.toBe(undefined)
+    expect(options.handler).not.toBe(undefined)
     expect(options.config.validate.params.id).not.toBe(undefined)
   })
 
@@ -76,7 +89,7 @@ describe(`Routes: Base`, () => {
 
     expect(options.method).toBe('DELETE')
     expect(options.path).toBe(routes.endpoint + '/{id}')
-    expect(options.config.handler).not.toBe(undefined)
+    expect(options.handler).not.toBe(undefined)
     expect(options.config.validate.params.id).not.toBe(undefined)
   })
 })

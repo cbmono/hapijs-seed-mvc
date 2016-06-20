@@ -5,7 +5,7 @@
 // You can overwrite specific settings by just creating
 // the corresponding block in your environment config file, ie:
 //
-//   // config/local.js
+//   // config/dev.js
 //
 //   module.exports = {
 //     //

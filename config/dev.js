@@ -1,12 +1,12 @@
+//
+// If you change this file to local.coffee,
+// it will be the last one to be loaded
+// and the values will overwrite all the others.
+//
 module.exports = {
   //
-  // API url
-  //
-  apiUrl: 'https://api.my-domain.com',
-
-  //
   // Database
-  // DB name is defined in default.js
+  // DB name is defined in default.coffee
   //
   database: {
     //
@@ -14,6 +14,7 @@ module.exports = {
     //
     client: 'pg',
     connection: {
+      database: 'test',
       host: 'localhost',
       port: 5432,
       user: 'root',
@@ -26,7 +27,7 @@ module.exports = {
   //
   logging: {
     console: {
-      level: 'info'
+      level: 'debug'
     }
   }
 }

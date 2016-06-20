@@ -21,6 +21,6 @@ describe('Routes: Main', () => {
 
     expect(route.path).toBe(path)
     expect(route.method).toBe(method)
-    expect(route.config.handler.directory.path).toBe('./public')
+    expect(route.handler.directory.path).toBe('./public')
   })
 })

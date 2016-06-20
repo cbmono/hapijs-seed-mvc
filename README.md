@@ -18,7 +18,7 @@ The seed contains a sample [hapi] application (ToDo Lists) and is preconfigured 
   - postgreSQL
   - SQLite3
   - Schema Migrations and Seeding
-- Pre-configured environments (_local_, _dev_, _staging_, _production_)
+- Pre-configured environments (_dev_, _qa_, _staging_, _production_)
 - Pre-configured CI settings ([Circle CI] / [Travis CI])
 - Powerful payload validations via [joi]
 - Auto-generated documentation ([lout])
@@ -53,7 +53,6 @@ The seed contains a sample [hapi] application (ToDo Lists) and is preconfigured 
 
 2. Install the dependencies
   ```
-  npm install gulp -g
   npm install
   ```
 
@@ -62,20 +61,19 @@ The seed contains a sample [hapi] application (ToDo Lists) and is preconfigured 
   CREATE DATABASE todo;
   ```
 
-4. Duplicate `config/local.js.default` and rename it into `config/local.js`. Then edit and enter your database settings (DB name goes into `config/default.js`).
+4. Duplicate `config/dev.js.default` and rename it into `config/dev.js`. Then edit and enter your database settings (DB name goes into `config/default.js`).
 
 5. [Migrate the database and seed it](#database-migration-and-seed)
   ```
-  gulp db:migrate
-  gulp db:seed
+  npm run db:migrate
+  npm run db:seed
   ```
 
 6. Run the app
   ```
-  gulp
+  export NODE_ENV=dev
+  npm start
   ```
-
-  (if `NODE_ENV` wasn't exported, then `local` is going to be used)
 
 7. Go to: [http://localhost:3000](http://localhost:3000)
 
@@ -92,28 +90,28 @@ Knex will keep a history of your executed migrations and save them into the DB t
 You have to save the migrations in `database/migrations/`. It's recommended to prefix the files with an incrementing number or timestamp. Otherwise it might be hard to keep track of the order the DB changes were executed.
 
 ```
-gulp db:migrate
+npm run db:migrate
 ```
 
 ### Rollback
 
 You can rollback the last group of executed migrations:
 ```
-gulp db:rollback
+npm run db:rollback
 ```
 
 ### Seeds
 
 You can populate your DB tables by executing seed files through Knex. Seed files are saved in `database/seeds/`.
 ```
-gulp db:seed
+npm run db:seed
 ```
 
 ## Tests
 
 This project has two kind of tests: _UnitTest_ and _API Tests_. For both [Jasmine2] is being used. If you want to execute both kind of tests (including Test Coverage), run:
 ```
-gulp test
+npm test
 ```
 
 ### UnitTest's
@@ -122,29 +120,31 @@ UnitTest's are stored within the folders of the implementation and contain `.spe
 
 You can execute them by running:
 ```
-gulp test:unit
+npm run test:unit
 ```
 
 ### API Tests
 
-API Tests are saved in `/tests/api` and are meant to test the RESTful end-points of your App.
+API Tests, also known as Integration Tests, are saved in `/tests/api` and are meant to test the RESTful end-points of your App.
 
 In order to test the server responses you have to start the server in a new terminal/tab:
 ```
 cd /path/to/your/project
-gulp
+export NODE_ENV=dev
+npm start
 ```
 
-Then execute your API Tests:
+Then execute your API Tests from a different terminal:
 ```
-gulp test:api
+export NODE_ENV=dev     # only needed once
+npm run test:api
 ```
 
 ### Test Coverage
 
 Test Coverage reports are generated through [istanbul]. The default threshold to pass the test coverage is set at [90%](https://github.com/cbmono/hapijs-seed-mvc/blob/master/tasks/gulp.tests.js#L71):
 ```
-gulp test:coverage
+npm run test:coverage
 ```
 
 Full reports can be found in `./tests/coverage`. Or just open `./tests/coverage/lcov-report` in your browser:

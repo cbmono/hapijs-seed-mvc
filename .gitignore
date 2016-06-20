@@ -1,6 +1,7 @@
 # --------------------
 # App Files
 # --------------------
+logs/
 tests/coverage/
 local.js
 
@@ -33,4 +34,3 @@ Icon
 .nodemonignore
 npm-debug.log
 node_modules/
-logs/

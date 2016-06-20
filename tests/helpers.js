@@ -11,7 +11,7 @@ GLOBAL._ = _
 GLOBAL.log = log
 
 /**
- * Helper method for routes
+ * Helper assert method for routes
  *
  * @param  {object} routes
  * @param  {string} expectedPath
@@ -24,11 +24,12 @@ export function assertRoutes( routes,
                               expectedMethod,
                               validateParams = false,
                               validatePayload = false) {
+
   let route = _.find(routes, { path: expectedPath, method: expectedMethod })
 
   expect(route.path).toBe(expectedPath)
   expect(route.method).toBe(expectedMethod)
-  expect(typeof route.config.handler).toBe('function')
+  expect(typeof route.handler).toBe('function')
 
   if (validateParams) {
     expect(route.config.validate.params).not.toBe(undefined)

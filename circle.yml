@@ -6,10 +6,10 @@ machine:
 
 test:
   override:
-    - gulp db:migrate
-    - gulp db:seed
-    - gulp:
+    - npm run db:migrate
+    - npm run db:seed
+    - npm start:
         background: true
-    - sleep 20
+    - sleep 30
     - curl --retry 10 --retry-delay 5 -v 127.0.0.1:3000/healthcheck
     - npm test

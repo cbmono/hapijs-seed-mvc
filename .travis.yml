@@ -11,9 +11,9 @@ services:
 before_script:
   - psql -c 'create database db_test;' -U postgres
   - "export NODE_ENV=ci-travis"
-  - gulp db:migrate
-  - gulp db:seed
-  - gulp &
+  - npm run db:migrate
+  - npm run db:seed
+  - npm start &
   - sleep 10
 
 script: npm test

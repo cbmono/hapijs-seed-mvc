@@ -6,7 +6,7 @@
 const gulp = require('gulp')
 const babel = require('gulp-babel')
 const gutil = require('gulp-util')
-const codecov = require('gulp-codecov.io')
+const codecov = require('gulp-codecov')
 const jasmine = require('gulp-jasmine')
 const istanbul = require('gulp-babel-istanbul')
 const runSequence = require('run-sequence')
@@ -71,8 +71,8 @@ gulp.task('test:coverage', () => mergeStream(
     .pipe(istanbul.enforceThresholds({ thresholds: { global: 90 } }))
 
     .on('finish', () => {
-      // Only run codecov.io inside of an CI env
-      if (process.env.NODE_ENV && process.env.NODE_ENV.match(/^ci-/i).length) {
+      // Only run codecov.io inside of a CI environment
+      if (process.env.NODE_ENV && /^ci-/i.test(process.env.NODE_ENV)) {
         gulp
           .src(coverageSrc + '/lcov.info')
           .pipe(codecov())
