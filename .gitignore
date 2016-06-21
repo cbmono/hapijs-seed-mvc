@@ -3,7 +3,7 @@
 # --------------------
 config/dev.js
 logs/
-test/coverage/
+tests/coverage/
 
 # --------------------
 # Sqlite3
