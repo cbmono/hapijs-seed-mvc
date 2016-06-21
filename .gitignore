@@ -1,9 +1,9 @@
 # --------------------
 # App Files
 # --------------------
+config/dev.js
 logs/
-tests/coverage/
-local.js
+test/coverage/
 
 # --------------------
 # Sqlite3
