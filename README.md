@@ -65,6 +65,7 @@ The seed contains a sample [hapi] application (ToDo Lists) and is preconfigured 
 
 5. [Migrate the database and seed it](#database-migration-and-seed)
   ```
+  export NODE_ENV=dev
   npm run db:migrate
   npm run db:seed
   ```
