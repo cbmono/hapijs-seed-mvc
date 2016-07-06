@@ -7,26 +7,26 @@
 //
 module.exports = {
 
-  database: {
+  database : {
     //
     // Postgres
     //
-    client: 'pg',
-    connection: {
-      database: 'db_test',
-      host: 'localhost',
-      port: 5432,
-      user: 'postgres',
-      password: ''
-    }
+    client     : 'pg',
+    connection : {
+      database : 'db_test',
+      host     : 'localhost',
+      port     : 5432,
+      user     : 'postgres',
+      password : '',
+    },
   },
 
   //
   // Logging
   //
-  logging: {
-    console: {
-      level: 'debug'
-    }
-  }
-}
+  logging : {
+    console : {
+      level : 'debug',
+    },
+  },
+};

@@ -22,46 +22,46 @@ module.exports = {
   //
   // Server
   //
-  server: {
-    port: 3000,
-    router: {
-      stripTrailingSlash: true
+  server : {
+    port   : 3000,
+    router : {
+      stripTrailingSlash : true,
     },
-    routes: {
-      cors: true
-    }
+    routes : {
+      cors : true,
+    },
   },
 
   //
   // API URL
   //
-  apiUrl: 'http://localhost:3000',
+  apiUrl : 'http://localhost:3000',
 
   //
   // Node runtime settings
   //
-  node: {
-    debugPort: 5858
+  node : {
+    debugPort : 5858,
   },
 
   //
   // Database
   //
-  database: {
-    connection: {
-      database: 'my-database-name'    // @changeme
-    }
+  database : {
+    connection : {
+      database : 'my-database-name',    // @changeme
+    },
   },
 
   //
   // Logging
   //
-  logging: {
-    console: {
-      prettyPrint: true,
-      colorize: true,
-      silent: false,
-      timestamp: true
-    }
-  }
-}
+  logging : {
+    console : {
+      prettyPrint : true,
+      colorize    : true,
+      silent      : false,
+      timestamp   : true,
+    },
+  },
+};

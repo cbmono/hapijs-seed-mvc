@@ -1,7 +1,7 @@
-import Boom  from 'boom'
+import Boom from 'boom';
 
 
-/******************************************
+/** ****************************************
  *
  * Define a basic skeleton for all custom controllers.
  *
@@ -10,7 +10,7 @@ import Boom  from 'boom'
  * code across your controllers (via the `constructor()`)
  *
  ******************************************/
- export class BaseController {
+export class BaseController {
 
   /**
    * Constructor
@@ -18,9 +18,11 @@ import Boom  from 'boom'
    * @param {stirng} notFoundMsg [optional]
    */
   constructor(notFoundMsg = '') {
-    this.Boom = Boom
-    this.notFoundMsg = notFoundMsg
-
+    if (new.target === BaseController) {
+      throw Error('BaseController is an abstract class and cannot be instantiated directly');
+    }
+    this.notFoundMsg = notFoundMsg;
+    this.Boom = Boom;
     // Initialise more shared code here ...
   }
 
@@ -28,16 +30,28 @@ import Boom  from 'boom'
    * Run reply() if response is not undefined.
    * Otherwise reply 404
    *
-   * @param  {mixed} response
-   * @param  {function} reply
+   * @param  {Function call} Knex call
+   * @param  {Function} hapi's reply
    *         Hapi default callback
    */
-  replyOnResponse(response, reply) {
-    if ((Array.isArray(response) && response.length) || response > 0) {
-      reply(response)
+  async handleRequest(func, reply) {
+    try {
+      const response = await func;
+
+      if ((Array.isArray(response) && response.length) || response > 0) {
+        reply(response);
+      }
+      else {
+        throw Error('Not Found');
+      }
     }
-    else {
-      reply(this.Boom.notFound(this.notFoundMsg))
+    catch (err) {
+      if (err.message === 'Not Found') {
+        reply(this.Boom.notFound(this.notFoundMsg));
+      }
+      else {
+        reply(this.Boom.wrap(err));
+      }
     }
   }
 

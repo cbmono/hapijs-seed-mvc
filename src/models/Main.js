@@ -1,5 +1,4 @@
-import * as Q  from 'q'
-import { BaseModelRDMS } from './BaseModel.RDMS'
+import { BaseModelRDMS } from './BaseModel.RDMS';
 
 //
 // Main
@@ -10,43 +9,36 @@ export class Main extends BaseModelRDMS {
    * Constructor
    */
   constructor() {
-    super('EMPTY')
+    super('EMPTY');
   }
-
   /**
    * Run a system healthcheck
    *
    * @return {promise}
    */
-  doHealthcheck() {
-    let deferred = Q.defer()
-    let response = {
-      ping: 'pong',
-      environment: process.env.NODE_ENV,
-      timestamp: Date.now()
-    }
+  async doHealthcheck() {
+    const { connectionSettings : { database : dbname } } = this.Knex.client;
+
+    const response = {
+      ping        : 'pong',
+      environment : process.env.NODE_ENV,
+      timestamp   : Date.now(),
+      database    : {
+        dbname,
+        healthy : true,
+      },
+    };
+
 
     // Check database
-    this.Knex.raw('SELECT 1+1 AS result')
-      .then(() => {
-        // There is a valid connection in the pool
-        response.uptime = process.uptime() + ' seconds'
-        response.database = {
-          healthy: true,
-          dbname: this.Knex.client.connectionSettings.database
-        }
-
-        deferred.resolve(response)
-      })
-      .catch(() => {
-        response.database = {
-          healthy: false,
-          dbname: this.Knex.client.connectionSettings.database
-        }
-
-        deferred.resolve(response)
-      })
-
-    return deferred.promise
+    try {
+      await this.Knex.raw('SELECT 1+1 AS result');
+      response.uptime = `${process.uptime()} seconds`;
+      return Promise.resolve(response);
+    }
+    catch (e) {
+      response.database.healthy = false;
+      return Promise.resolve(response);
+    }
   }
 }

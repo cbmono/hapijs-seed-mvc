@@ -1,51 +1,51 @@
-import { assertRoutes } from '../../tests/helpers'
-import * as routes  from './todo_lists.routes'
+import { assertRoutes } from '../../tests/helpers';
+import * as routes from './todo_lists.routes';
 
 
 //
 // Tests
 //
-describe(`Routes: ToDo Lists`, () => {
+describe('Routes: ToDo Lists', () => {
 
   it('should expose GET /todo-lists', () => {
-    let path = '/todo-lists'
-      , method = 'GET'
+    const path = '/todo-lists';
+    const method = 'GET';
 
-    assertRoutes(routes.default, path, method)
-  })
+    assertRoutes(routes.default, path, method);
+  });
 
   it('should expose GET /todo-lists/{id}', () => {
-    let path = '/todo-lists/{id}'
-      , method = 'GET'
+    const path = '/todo-lists/{id}';
+    const method = 'GET';
 
-    assertRoutes(routes.default, path, method, true)
-  })
+    assertRoutes(routes.default, path, method, true);
+  });
 
   it('should expose GET /todo-lists/{id}/todos', () => {
-    let path = '/todo-lists/{id}/todos'
-      , method = 'GET'
+    const path = '/todo-lists/{id}/todos';
+    const method = 'GET';
 
-    assertRoutes(routes.default, path, method, true)
-  })
+    assertRoutes(routes.default, path, method, true);
+  });
 
   it('should expose POST /todo-lists', () => {
-    let path = '/todo-lists'
-      , method = 'POST'
+    const path = '/todo-lists';
+    const method = 'POST';
 
-    assertRoutes(routes.default, path, method, false, true)
-  })
+    assertRoutes(routes.default, path, method, false, true);
+  });
 
   it('should expose PUT /todo-lists/{id}', () => {
-    let path = '/todo-lists/{id}'
-      , method = 'PUT'
+    const path = '/todo-lists/{id}';
+    const method = 'PUT';
 
-    assertRoutes(routes.default, path, method, true, true)
-  })
+    assertRoutes(routes.default, path, method, true, true);
+  });
 
   it('should expose DELETE /todo-lists/{1}', () => {
-    let path = '/todo-lists/{id}'
-      , method = 'DELETE'
+    const path = '/todo-lists/{id}';
+    const method = 'DELETE';
 
-    assertRoutes(routes.default, path, method, true)
-  })
-})
+    assertRoutes(routes.default, path, method, true);
+  });
+});

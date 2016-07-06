@@ -1,5 +1,5 @@
-import { BaseModelRDMS } from './BaseModel.RDMS'
-import { ToDo } from './ToDo'
+import { BaseModelRDMS } from './BaseModel.RDMS';
+import { ToDo } from './ToDo';
 
 
 //
@@ -11,10 +11,10 @@ export class ToDoList extends BaseModelRDMS {
    * Constructor
    */
   constructor() {
-    let tableName = 'todo_lists'
-    super(tableName)
+    const tableName = 'todo_lists';
+    super(tableName);
 
-    this.ToDo = new ToDo()
+    this.ToDo = new ToDo();
   }
 
   /**
@@ -27,13 +27,14 @@ export class ToDoList extends BaseModelRDMS {
   findByIdWithToDos(id) {
     return this.findById(id).then((response) => {
       if (response.length) {
-        return this.ToDo.findBy('todo_list_id', id).then((todos) => {
-          response[0].todos = todos
-          return response
-        })
+        return this.ToDo.findBy('todo_list_id', id).then(todos => {
+          /* eslint no-param-reassign: 0*/
+          response[0].todos = todos;
+          return response;
+        });
       }
 
-      return response
-    })
+      return response;
+    });
   }
 }

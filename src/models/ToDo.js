@@ -1,4 +1,4 @@
-import { BaseModelRDMS } from './BaseModel.RDMS'
+import { BaseModelRDMS } from './BaseModel.RDMS';
 
 
 //
@@ -10,7 +10,7 @@ export class ToDo extends BaseModelRDMS {
    * Constructor
    */
   constructor() {
-    let tableName = 'todos'
-    super(tableName)
+    const tableName = 'todos';
+    super(tableName);
   }
 }

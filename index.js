@@ -1,4 +1,2 @@
-'use strict'
-
-require('babel-core/register')
-require('./src')
+require('babel-core/register');
+require('./src');

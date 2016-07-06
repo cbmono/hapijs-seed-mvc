@@ -1,14 +1,12 @@
-import config  from 'config'
-import _  from 'lodash'
-import { default as log } from '../../src/logger'
-
-const rp = require('request-promise')
-
+import config from 'config';
+import _ from 'lodash';
+import testUtil from '../testUtility';
+import fetch from 'node-fetch' ;
 
 //
 // Tests
 //
-describe(`API Test: ToDo Lists`, () => {
+describe('API Test: ToDo Lists', () => {
   /**
    * NOTE: follow this order for API Tests
    *
@@ -16,260 +14,189 @@ describe(`API Test: ToDo Lists`, () => {
    */
 
   // Keep track of the created ID
-  let createdId
-    , createdData = { name: 'New ToDo List' }
-    , updatedData = { name: 'Updated ToDo List name' }
+  let createdId;
+  const createdData = { name : 'New ToDo List' };
+  const updatedData = { name : 'Updated ToDo List name' };
 
   // Expected fields for ToDo Lists
-  let expectedFields = [ 'id', 'name', 'created_at', 'updated_at' ]
+  const expectedFields = ['id', 'name', 'created_at', 'updated_at'];
 
 
   describe('POST /todo-lists', () => {
-    it(`should create a new ToDo List`, (done) => {
-      rp({
-        method: 'POST',
-        uri: config.apiUrl + '/todo-lists',
-        resolveWithFullResponse: true,
-        body: JSON.stringify(createdData)
-      })
-      .then(
-        (response) => {
-          let body = JSON.parse(response.body)
+    it('should create a new ToDo List', async done => {
 
-          expect(response.statusCode).toBe(200)
-          expect(body.length).toBe(1)
-          expect(body[0].id).toBeGreaterThan(0)
-          expect(body[0].name).toBe(createdData.name)
-          expect(body[0].created_at).toBe(body[0].updated_at)
-          expect(_.keys(body[0])).toEqual(expectedFields)
+      await testUtil(async () => {
+        const response = await fetch(`${config.apiUrl}/todo-lists`, {
+          method : 'POST',
+          body   : JSON.stringify(createdData),
+        });
+        const body = await response.json();
 
-          createdId = body[0].id
-          done()
-        },
-        (err) => {
-          console.error(err)
-          fail()
-        }
-      )
-    })
+        expect(response.ok).toBe(true);
+        expect(body.length).toBe(1);
+        expect(body[0].id).toBeGreaterThan(0);
+        expect(body[0].name).toBe(createdData.name);
+        expect(body[0].created_at).toBe(body[0].updated_at);
+        expect(_.keys(body[0])).toEqual(expectedFields);
 
-    it(`should return status code 400`, (done) => {
-      rp({
-        method: 'POST',
-        uri: config.apiUrl + '/todo-lists'
-      })
-      .then(
-        (response) => fail,
-        (err) => {
-          expect(err.statusCode).toBe(400)
-          done()
-        }
-      )
-    })
-  })
+        createdId = body[0].id;
+      }, done);
+    });
+
+    it('should return status code 400', async done => {
+
+      await testUtil(async () => {
+        const response = await fetch(`${config.apiUrl}/todo-lists`, {
+          method : 'POST',
+        });
+
+        expect(response.ok).toBe(false);
+      }, done);
+    });
+  });
 
   describe('PUT /todo-lists/{id}', () => {
-    it(`should update an existing ToDo List`, (done) => {
-      rp({
-        method: 'PUT',
-        uri: config.apiUrl + '/todo-lists/' + createdId,
-        resolveWithFullResponse: true,
-        body: JSON.stringify(updatedData)
-      })
-      .then(
-        (response) => {
-          let body = JSON.parse(response.body)
+    it('should update an existing ToDo List', async done => {
 
-          expect(response.statusCode).toBe(200)
-          expect(body.length).toBe(1)
-          expect(body[0].id).toBe(createdId)
-          expect(body[0].name).toBe(updatedData.name)
-          expect(body[0].created_at).not.toBe(body[0].updated_at)
-          expect(_.keys(body[0])).toEqual(expectedFields)
+      await testUtil(async () => {
+        const response = await fetch(`${config.apiUrl}/todo-lists/${createdId}`, {
+          method : 'PUT',
+          body   : JSON.stringify(updatedData),
+        });
+        const body = await response.json();
 
-          done()
-        },
-        (err) => {
-          console.error(err)
-          fail()
-        }
-      )
-    })
+        expect(response.ok).toBe(true);
+        expect(body.length).toBe(1);
+        expect(body[0].id).toBe(createdId);
+        expect(body[0].name).toBe(updatedData.name);
+        expect(body[0].created_at).not.toBe(body[0].updated_at);
+        expect(_.keys(body[0])).toEqual(expectedFields);
+      }, done);
+    });
 
-    it(`should return status code 400`, (done) => {
-      rp({
-        method: 'PUT',
-        uri: config.apiUrl + '/todo-lists/' + createdId
-      })
-      .then(
-        (response) => fail,
-        (err) => {
-          expect(err.statusCode).toBe(400)
-          done()
-        }
-      )
-    })
+    it('should return status code 400', async done => {
 
-    it(`should return status code 404`, (done) => {
-      rp({
-        method: 'PUT',
-        uri: config.apiUrl + '/todo-lists/-1',
-        body: JSON.stringify(updatedData)
-      })
-      .then(
-        (response) => fail,
-        (err) => {
-          expect(err.statusCode).toBe(404)
-          done()
-        }
-      )
-    })
-  })
+      await testUtil(async () => {
+        const response = await fetch(`${config.apiUrl}/todo-lists/${createdId}`, {
+          method : 'PUT',
+        });
+
+        expect(response.status).toBe(400);
+      }, done);
+    });
+
+    it('should return status code 404', async done => {
+      await testUtil(async () => {
+        const response = await fetch(`${config.apiUrl}/todo-lists/${createdId}/-1`, {
+          method : 'PUT',
+          body   : JSON.stringify(updatedData),
+        });
+
+        expect(response.status).toBe(404);
+      }, done);
+    });
+  });
 
   describe('GET /todo-lists/{id}', () => {
-    it(`should retrieve one ToDo List`, (done) => {
-      rp({
-        method: 'GET',
-        uri: config.apiUrl + '/todo-lists/' + createdId,
-        resolveWithFullResponse: true
-      })
-      .then(
-        (response) => {
-          let body = JSON.parse(response.body)
+    it('should retrieve one ToDo List', async done => {
 
-          expect(response.statusCode).toBe(200)
-          expect(body.length).toBe(1)
-          expect(body[0].id).toBe(createdId)
-          expect(body[0].name).toBe(updatedData.name)
-          expect(_.keys(body[0])).toEqual(expectedFields)
+      await testUtil(async () => {
+        const response = await fetch(`${config.apiUrl}/todo-lists/${createdId}`, {
+          method : 'GET',
+          body   : JSON.stringify(updatedData),
+        });
 
-          done()
-        },
-        (err) => {
-          console.error(err)
-          fail()
-        }
-      )
-    })
+        const body = await response.json();
 
-    it(`should return status code 404`, (done) => {
-      rp({
-        method: 'GET',
-        uri: config.apiUrl + '/todo-lists/-1'
-      })
-      .then(
-        (response) => fail,
-        (err) => {
-          expect(err.statusCode).toBe(404)
-          done()
-        }
-      )
-    })
-  })
+        expect(response.statusCode).toBe(200);
+        expect(body.length).toBe(1);
+        expect(body[0].id).toBe(createdId);
+        expect(body[0].name).toBe(updatedData.name);
+        expect(_.keys(body[0])).toEqual(expectedFields);
+      }, done);
+    });
+
+    it('should return status code 404', async done => {
+      await testUtil(async () => {
+        const response = await fetch(`${config.apiUrl}/todo-lists/-1`, {
+          method : 'GET',
+        });
+
+        expect(response.status).toBe(404);
+      }, done);
+    });
+  });
 
   describe('GET /todo-lists/{id}/todos', () => {
-    it(`should retrieve one ToDo List and all its ToDo's`, (done) => {
-      rp({
-        method: 'GET',
-        uri: config.apiUrl + '/todo-lists/' + createdId + '/todos',
-        resolveWithFullResponse: true
-      })
-      .then(
-        (response) => {
-          let body = JSON.parse(response.body)
+    it('should retrieve one ToDo List and all its ToDo\'s', async done => {
 
-          expect(response.statusCode).toBe(200)
-          expect(body.length).toBe(1)
-          expect(body[0].id).toBe(createdId)
-          expect(_.isArray(body[0].todos)).toBe(true)
+      await testUtil(async () => {
+        const response = await fetch(`${config.apiUrl}/todo-lists/${createdId}/todos`, {
+          method : 'GET',
+        });
+        const body = await response.json();
 
-          done()
-        },
-        (err) => {
-          console.error(err)
-          fail()
-        }
-      )
-    })
+        expect(response.status).toBe(200);
+        expect(body.length).toBe(1);
+        expect(body[0].id).toBe(createdId);
+        expect(_.isArray(body[0].todos)).toBe(true);
+      }, done);
 
-    it(`should return status code 404`, (done) => {
-      rp({
-        method: 'GET',
-        uri: config.apiUrl + '/todo-lists/-1/todos'
-      })
-      .then(
-        (response) => fail,
-        (err) => {
-          expect(err.statusCode).toBe(404)
-          done()
-        }
-      )
-    })
-  })
+    });
+
+    it('should return status code 404', async done => {
+      await testUtil(async () => {
+        const response = await fetch(`${config.apiUrl}/todo-lists/-1/todos`, {
+          method : 'GET',
+        });
+
+        expect(response.status).toBe(404);
+      }, done);
+    });
+  });
 
   describe('GET /todo-lists', () => {
-    it(`should retrieve all ToDo Lists`, (done) => {
-      rp({
-        method: 'GET',
-        uri: config.apiUrl + '/todo-lists',
-        resolveWithFullResponse: true
-      })
-      .then(
-        (response) => {
-          let body = JSON.parse(response.body)
-          let createdEntry = _.find(body, { id: createdId })
+    it('should retrieve all ToDo Lists', async done => {
 
-          expect(response.statusCode).toBe(200)
-          expect(body.length).toBeGreaterThan(0)
-          expect(createdEntry.id).toBe(createdId)
-          expect(createdEntry.name).toBe(updatedData.name)
-          expect(_.keys(createdEntry)).toEqual(expectedFields)
+      await testUtil(async () => {
+        const response = await fetch(`${config.apiUrl}/todo-lists/`, {
+          method : 'GET',
+        });
 
-          done()
-        },
-        (err) => {
-          console.error(err)
-          fail()
-        }
-      )
-    })
-  })
+        const body = await response.json();
+        const createdEntry = _.find(body, { id : createdId });
+
+        expect(response.status).toBe(200);
+        expect(body.length).toBeGreaterThan(0);
+        expect(createdEntry.id).toBe(createdId);
+        expect(createdEntry.name).toBe(updatedData.name);
+        expect(_.keys(createdEntry)).toEqual(expectedFields);
+      }, done);
+    });
+  });
 
   describe('DELETE /todo-lists/{id}', () => {
-    it(`should delete one ToDo List`, (done) => {
-      rp({
-        method: 'DELETE',
-        uri: config.apiUrl + '/todo-lists/' + createdId,
-        resolveWithFullResponse: true
-      })
-      .then(
-        (response) => {
-          let body = JSON.parse(response.body)
+    it('should delete one ToDo List', async done => {
+      await testUtil(async () => {
+        const response = await fetch(`${config.apiUrl}/todo-lists/${createdId}`, {
+          method : 'DELETE',
+        });
 
-          expect(response.statusCode).toBe(200)
-          expect(body).toBe(1)
+        const body = await response.json();
 
-          done()
-        },
-        (err) => {
-          console.error(err)
-          fail()
-        }
-      )
-    })
+        expect(response.status).toBe(200);
+        expect(body).toBe(1);
+      }, done);
+    });
 
-    it(`should return status code 404`, (done) => {
-      rp({
-        method: 'DELETE',
-        uri: config.apiUrl + '/todo-lists/-1'
-      })
-      .then(
-        (response) => fail,
-        (err) => {
-          expect(err.statusCode).toBe(404)
-          done()
-        }
-      )
-    })
-  })
-})
+    it('should return status code 404', async done => {
+      await testUtil(async () => {
+        const response = await fetch(`${config.apiUrl}/todo-lists/-1`, {
+          method : 'DELETE',
+        });
+
+        expect(response.status).toBe(404);
+      }, done);
+    });
+  });
+});

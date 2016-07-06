@@ -1,17 +1,17 @@
-import { MainController } from '../controllers/main.controller'
-import { BaseRoutes } from './base.routes'
+import { MainController } from '../controllers/main.controller';
+import { BaseRoutes } from './base.routes';
 
 
 //
 // Main (global) routes
 //
-let routes = new class MainRoutes extends BaseRoutes {
+const routes = new class MainRoutes extends BaseRoutes {
 
   /**
    * Constructor
    */
   constructor() {
-    super(new MainController())
+    super(new MainController());
   }
 
   /**
@@ -21,14 +21,14 @@ let routes = new class MainRoutes extends BaseRoutes {
    */
   healthcheck() {
     return {
-      method: 'GET',
-      path: '/healthcheck',
-      handler: this.controller.healthcheck.bind(this.controller),
-      config: {
-        description: 'Display the status of the App and DB connection',
-        tags: [ 'public' ]
-      }
-    }
+      method  : 'GET',
+      path    : '/healthcheck',
+      handler : this.controller.healthcheck.bind(this.controller),
+      config  : {
+        description : 'Display the status of the App and DB connection',
+        tags        : ['public'],
+      },
+    };
   }
 
   /**
@@ -38,23 +38,23 @@ let routes = new class MainRoutes extends BaseRoutes {
    */
   staticFiles() {
     return {
-      method: 'GET',
-      path: '/{param*}',
-      handler: {
-        directory: { path: './public' }
+      method  : 'GET',
+      path    : '/{param*}',
+      handler : {
+        directory : { path : './public' },
       },
-      config: {
-        plugins: { lout: false },
-        description: 'Serve static files from ./public'
-      }
-    }
+      config : {
+        plugins     : { lout : false },
+        description : 'Serve static files from ./public',
+      },
+    };
   }
-}
+};
 
 //
 // Export public end-points
 //
 export default [
   routes.healthcheck(),
-  routes.staticFiles()
-]
+  routes.staticFiles(),
+];

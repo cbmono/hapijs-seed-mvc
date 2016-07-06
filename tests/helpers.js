@@ -1,5 +1,5 @@
-import _  from 'lodash'
-import { default as log } from '../src/logger'
+import _ from 'lodash';
+import { default as log } from '../src/logger';
 
 
 //
@@ -7,8 +7,8 @@ import { default as log } from '../src/logger'
 //
 
 // Global dependencies (available across all tests)
-GLOBAL._ = _
-GLOBAL.log = log
+GLOBAL._ = _;
+GLOBAL.log = log;
 
 /**
  * Helper assert method for routes
@@ -19,23 +19,23 @@ GLOBAL.log = log
  * @param  {boolean} validateParams [optioal]
  * @param  {boolean} validatePayload [optioal]
  */
-export function assertRoutes( routes,
+export function assertRoutes(routes,
                               expectedPath,
                               expectedMethod,
                               validateParams = false,
                               validatePayload = false) {
 
-  let route = _.find(routes, { path: expectedPath, method: expectedMethod })
+  const route = _.find(routes, { path : expectedPath, method : expectedMethod });
 
-  expect(route.path).toBe(expectedPath)
-  expect(route.method).toBe(expectedMethod)
-  expect(typeof route.handler).toBe('function')
+  expect(route.path).toBe(expectedPath);
+  expect(route.method).toBe(expectedMethod);
+  expect(typeof route.handler).toBe('function');
 
   if (validateParams) {
-    expect(route.config.validate.params).not.toBe(undefined)
+    expect(route.config.validate.params).not.toBe(undefined);
   }
 
   if (validatePayload) {
-    expect(route.config.validate.payload).not.toBe(undefined)
+    expect(route.config.validate.payload).not.toBe(undefined);
   }
 }

@@ -1,58 +1,62 @@
-'use strict'
-
-import _  from 'lodash'
-import fs  from 'fs'
-import config  from 'config'
-import Hapi  from 'hapi'
-import path  from 'path'
-import { default as pluginsConfig } from '../config/hapijs.plugins'
-import { default as log } from './logger'
+import _ from 'lodash';
+import fs from 'fs';
+import config from 'config';
+import Hapi from 'hapi';
+import path from 'path';
+import { default as pluginsConfig } from '../config/hapijs.plugins';
+import { default as log } from './logger';
 
 
 //
-// Global dependencies 
+// Global dependencies
 // (available across the whole App)
 //
-GLOBAL._ = _        // lodash
-GLOBAL.log = log    // Used instead of console()
+GLOBAL._ = _;        // lodash
+GLOBAL.log = log;    // Used instead of console()
 
 //
 // Create server
 //
-const server = new Hapi.Server()
-server.connection(config.get('server'))
+const server = new Hapi.Server();
+server.connection(config.get('server'));
+
+
+/**
+ * registerRoute - Register Routes to the server
+ *
+ * @param { Object } file
+ *
+ */
+const registerRoute = file => {
+  const routes = require(`./routes/${file}`).default;
+  routes.forEach(route => server.route(route));
+};
 
 //
 // Register Hapi plugin's
 //
 server.register(pluginsConfig,
 
-  (err) => {
-    if (err) throw err
+  err => {
+    if (err) throw err;
 
     // Load routes from ./routes
-    let routesNormalizedPath = path.join(__dirname, 'routes')
+    const routesNormalizedPath = path.join(__dirname, 'routes');
 
-    fs.readdirSync(routesNormalizedPath).forEach((file) => {
-      
-      // Ignore base.routes and .spec files
-      if (file !== 'base.routes.js' && file.indexOf('.spec.') === -1) {
-        let routes = require('./routes/' + file).default
+    fs.readdirSync(routesNormalizedPath)
+      .filter(file => !file.includes('.spec') && file !== 'base.routes.js')
+      .forEach(registerRoute);
 
-        routes.forEach((route) => server.route(route))
-      }
-    })
-    
     //
     // Start the server
     //
-    server.start((err) => {
-      if (err) throw err
+    server.start(error => {
+      if (error) throw error;
 
       log.info({
-        'Server running at': server.info.uri,
-        'NODE_ENV': process.env.NODE_ENV
-      })
-    })
+        'Server running at' : server.info.uri,
+        'NODE_ENV'          : process.env.NODE_ENV,
+      });
+    });
   }
-)
+);

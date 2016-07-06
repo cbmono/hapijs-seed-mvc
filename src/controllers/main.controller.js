@@ -1,4 +1,4 @@
-import { Main } from '../models/Main'
+import { Main } from '../models/Main';
 
 
 //
@@ -10,7 +10,7 @@ export class MainController {
    * Constructor
    */
   constructor() {
-    this.Main = new Main()
+    this.Main = new Main();
   }
 
   /**
@@ -19,6 +19,6 @@ export class MainController {
   healthcheck(request, reply) {
     this.Main.doHealthcheck()
       .then(reply)
-      .catch(reply)
+      .catch(reply);
   }
 }

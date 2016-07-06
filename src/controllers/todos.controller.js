@@ -1,5 +1,5 @@
-import { ToDo } from '../models/ToDo'
-import { BaseController } from './base.controller'
+import { ToDo } from '../models/ToDo';
+import { BaseController } from './base.controller';
 
 
 //
@@ -11,63 +11,47 @@ export class ToDosController extends BaseController {
    * Constructor
    */
   constructor() {
-    let notFoundMsg = `ToDo List not found`
+    const notFoundMsg = 'ToDo List not found';
 
-    super(notFoundMsg)
-    this.ToDo = new ToDo()
+    super(notFoundMsg);
+    this.ToDo = new ToDo();
   }
 
   /**
    * Retrieve the list of all ToDo's
    */
   index(request, reply) {
-    this.ToDo.findAll()
-      .then((response) => reply(response))
-      .catch((err) => reply(this.Boom.wrap(err)))
+    this.handleRequest(this.ToDo.findAll(), reply);
   }
 
   /**
    * Retrieve a single ToDo
    */
-  view(request, reply) {
-    let id = request.params.id
-
-    this.ToDo.findById(id)
-      .then((response) => this.replyOnResponse(response, reply))
-      .catch((err) => reply(this.Boom.wrap(err)))
+  view({ params : { id } }, reply) {
+    this.handleRequest(this.ToDo.findById(id), reply);
   }
 
   /**
    * Create a new ToDo
    */
   create(request, reply) {
-    let data = request.payload
-
-    this.ToDo.save(data)
-      .then((response) => reply(response))
-      .catch((err) => reply(this.Boom.wrap(err)))
+    const data = request.payload;
+    this.handleRequest(this.ToDo.save(data), reply);
   }
 
   /**
    * Update an existing ToDo
    */
   update(request, reply) {
-    let id = request.params.id
-      , data = request.payload
-
-    this.ToDo.update(id, data)
-      .then((response) => this.replyOnResponse(response, reply))
-      .catch((err) => reply(this.Boom.wrap(err)))
+    const { id } = request.params;
+    const data = request.payload;
+    this.handleRequest(this.ToDo.update(id, data), reply);
   }
 
   /**
    * Delete a ToDo
    */
-  remove(request, reply) {
-    let id = request.params.id
-
-    this.ToDo.del(id)
-      .then((response) => this.replyOnResponse(response, reply))
-      .catch((err) => reply(this.Boom.wrap(err)))
+  remove({ params : { id } }, reply) {
+    this.handleRequest(this.ToDo.del(id), reply);
   }
 }

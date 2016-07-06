@@ -1,4 +1,4 @@
-import config  from 'config'
-import knex  from 'knex'
+import config from 'config';
+import knex from 'knex';
 
-export default knex(config.get('database'))
+export default knex(config.get('database'));
