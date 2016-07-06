@@ -6,6 +6,7 @@ machine:
 
 test:
   override:
+    - npm install -g babel-cli
     - npm run db:migrate
     - npm run db:seed
     - npm start:

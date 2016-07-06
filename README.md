@@ -53,6 +53,7 @@ The seed contains a sample [hapi] application (ToDo Lists) and is preconfigured 
 
 2. Install the dependencies.
   ```
+  npm install -g babel-cli
   npm install
   ```
 
