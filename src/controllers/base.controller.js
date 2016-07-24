@@ -21,8 +21,10 @@ export class BaseController {
     if (new.target === BaseController) {
       throw Error('BaseController is an abstract class and cannot be instantiated directly');
     }
+
     this.notFoundMsg = notFoundMsg;
     this.Boom = Boom;
+
     // Initialise more shared code here ...
   }
 
@@ -46,12 +48,7 @@ export class BaseController {
       }
     }
     catch (err) {
-      if (err.message === 'Not Found') {
-        reply(this.Boom.notFound(this.notFoundMsg));
-      }
-      else {
-        reply(this.Boom.wrap(err));
-      }
+      reply(this.Boom.notFound(this.notFoundMsg));
     }
   }
 

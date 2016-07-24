@@ -87,7 +87,7 @@ describe('API Test: ToDo Lists', () => {
 
     it('should return status code 404', async done => {
       await testUtil(async () => {
-        const response = await fetch(`${config.apiUrl}/todo-lists/${createdId}/-1`, {
+        const response = await fetch(`${config.apiUrl}/todo-lists/-1`, {
           method : 'PUT',
           body   : JSON.stringify(updatedData),
         });
@@ -108,7 +108,7 @@ describe('API Test: ToDo Lists', () => {
 
         const body = await response.json();
 
-        expect(response.statusCode).toBe(200);
+        expect(response.status).toBe(200);
         expect(body.length).toBe(1);
         expect(body[0].id).toBe(createdId);
         expect(body[0].name).toBe(updatedData.name);

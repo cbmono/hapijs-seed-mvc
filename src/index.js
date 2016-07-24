@@ -11,8 +11,8 @@ import { default as log } from './logger';
 // Global dependencies
 // (available across the whole App)
 //
-GLOBAL._ = _;        // lodash
-GLOBAL.log = log;    // Used instead of console()
+global._ = _;        // lodash
+global.log = log;    // Used instead of console()
 
 //
 // Create server
@@ -50,8 +50,8 @@ server.register(pluginsConfig,
     //
     // Start the server
     //
-    server.start(error => {
-      if (error) throw error;
+    server.start(serverErr => {
+      if (serverErr) throw serverErr;
 
       log.info({
         'Server running at' : server.info.uri,
