@@ -1,7 +1,7 @@
-import config from 'config';
 import _ from 'lodash';
-import testUtil from '../testUtility';
+import config from 'config';
 import fetch from 'node-fetch' ;
+import testUtil from '../testUtility';
 
 //
 // Tests
@@ -15,21 +15,21 @@ describe('API Test: ToDo Lists', () => {
 
   // Keep track of the created ID
   let createdId;
+
   const createdData = { name : 'New ToDo List' };
   const updatedData = { name : 'Updated ToDo List name' };
 
   // Expected fields for ToDo Lists
   const expectedFields = ['id', 'name', 'created_at', 'updated_at'];
 
-
   describe('POST /todo-lists', () => {
     it('should create a new ToDo List', async done => {
-
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todo-lists`, {
-          method : 'POST',
-          body   : JSON.stringify(createdData),
+          method: 'POST',
+          body: JSON.stringify(createdData)
         });
+
         const body = await response.json();
 
         expect(response.ok).toBe(true);
@@ -44,10 +44,9 @@ describe('API Test: ToDo Lists', () => {
     });
 
     it('should return status code 400', async done => {
-
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todo-lists`, {
-          method : 'POST',
+          method: 'POST'
         });
 
         expect(response.ok).toBe(false);
@@ -57,12 +56,12 @@ describe('API Test: ToDo Lists', () => {
 
   describe('PUT /todo-lists/{id}', () => {
     it('should update an existing ToDo List', async done => {
-
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todo-lists/${createdId}`, {
-          method : 'PUT',
-          body   : JSON.stringify(updatedData),
+          method: 'PUT',
+          body: JSON.stringify(updatedData)
         });
+
         const body = await response.json();
 
         expect(response.ok).toBe(true);
@@ -75,10 +74,9 @@ describe('API Test: ToDo Lists', () => {
     });
 
     it('should return status code 400', async done => {
-
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todo-lists/${createdId}`, {
-          method : 'PUT',
+          method: 'PUT'
         });
 
         expect(response.status).toBe(400);
@@ -88,8 +86,8 @@ describe('API Test: ToDo Lists', () => {
     it('should return status code 404', async done => {
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todo-lists/-1`, {
-          method : 'PUT',
-          body   : JSON.stringify(updatedData),
+          method: 'PUT',
+          body: JSON.stringify(updatedData)
         });
 
         expect(response.status).toBe(404);
@@ -99,11 +97,10 @@ describe('API Test: ToDo Lists', () => {
 
   describe('GET /todo-lists/{id}', () => {
     it('should retrieve one ToDo List', async done => {
-
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todo-lists/${createdId}`, {
-          method : 'GET',
-          body   : JSON.stringify(updatedData),
+          method: 'GET',
+          body: JSON.stringify(updatedData)
         });
 
         const body = await response.json();
@@ -119,7 +116,7 @@ describe('API Test: ToDo Lists', () => {
     it('should return status code 404', async done => {
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todo-lists/-1`, {
-          method : 'GET',
+          method: 'GET'
         });
 
         expect(response.status).toBe(404);
@@ -129,11 +126,11 @@ describe('API Test: ToDo Lists', () => {
 
   describe('GET /todo-lists/{id}/todos', () => {
     it('should retrieve one ToDo List and all its ToDo\'s', async done => {
-
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todo-lists/${createdId}/todos`, {
-          method : 'GET',
+          method: 'GET'
         });
+
         const body = await response.json();
 
         expect(response.status).toBe(200);
@@ -147,7 +144,7 @@ describe('API Test: ToDo Lists', () => {
     it('should return status code 404', async done => {
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todo-lists/-1/todos`, {
-          method : 'GET',
+          method: 'GET'
         });
 
         expect(response.status).toBe(404);
@@ -157,14 +154,13 @@ describe('API Test: ToDo Lists', () => {
 
   describe('GET /todo-lists', () => {
     it('should retrieve all ToDo Lists', async done => {
-
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todo-lists/`, {
-          method : 'GET',
+          method: 'GET'
         });
 
         const body = await response.json();
-        const createdEntry = _.find(body, { id : createdId });
+        const createdEntry = _.find(body, { id: createdId });
 
         expect(response.status).toBe(200);
         expect(body.length).toBeGreaterThan(0);
@@ -192,7 +188,7 @@ describe('API Test: ToDo Lists', () => {
     it('should return status code 404', async done => {
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todo-lists/-1`, {
-          method : 'DELETE',
+          method: 'DELETE'
         });
 
         expect(response.status).toBe(404);

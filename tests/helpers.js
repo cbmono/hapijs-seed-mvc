@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { default as log } from '../src/logger';
+import { default as log } from '../libs/logger';
 
 
 //
@@ -13,17 +13,17 @@ GLOBAL.log = log;
 /**
  * Helper assert method for routes
  *
- * @param  {object} routes
- * @param  {string} expectedPath
- * @param  {string} expectedMethod
- * @param  {boolean} validateParams [optioal]
- * @param  {boolean} validatePayload [optioal]
+ * @param {object} routes
+ * @param {string} expectedPath
+ * @param {string} expectedMethod
+ * @param {boolean} validateParams [optioal]
+ * @param {boolean} validatePayload [optioal]
  */
 export function assertRoutes(routes,
-                              expectedPath,
-                              expectedMethod,
-                              validateParams = false,
-                              validatePayload = false) {
+                             expectedPath,
+                             expectedMethod,
+                             validateParams = false,
+                             validatePayload = false) {
 
   const route = _.find(routes, { path : expectedPath, method : expectedMethod });
 

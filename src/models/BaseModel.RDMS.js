@@ -1,5 +1,5 @@
 import config from 'config';
-import Knex from '../db';
+import Knex from '../../libs/db';
 
 const getTimestamps = Symbol('getTimestamps');
 
@@ -10,11 +10,11 @@ const getTimestamps = Symbol('getTimestamps');
  * This (abstract) class is meant to extend any custom model
  * by providing baisc find/findBy and CRUD methods, such as:
  *
- * 		* find()
- * 		* findBy()
- * 		* save()
- * 		* update()
- * 		* ... etc.
+ *    * find()
+ *    * findBy()
+ *    * save()
+ *    * update()
+ *    * ... etc.
  *
  * Supported Relational Databases :
  *
@@ -40,6 +40,7 @@ export class BaseModelRDMS {
     if (!tableName) {
       throw new Error('DB table name undefined');
     }
+
     if (new.target === BaseModelRDMS) {
       throw Error('BaseModelRDMS is an abstract class and cannot be instantiated directly');
     }
@@ -103,9 +104,10 @@ export class BaseModelRDMS {
       const timestamps = this[getTimestamps]();
       newData = {
         ...newData,
-        ...timestamps,
+        ...timestamps
       };
     }
+
     const response = this.Knex(this.tableName).insert(newData);
 
     if (this.dbConfig.client === 'pg') {
@@ -135,6 +137,7 @@ export class BaseModelRDMS {
         ...newData,
         ...timestamps,
       };
+
       delete newData.created_at;
     }
 
@@ -199,9 +202,10 @@ export class BaseModelRDMS {
    */
   [ getTimestamps ]() {
     const now = this.now();
+
     return {
-      updated_at : now,
-      created_at : now,
+      updated_at: now,
+      created_at: now
     };
   }
 }

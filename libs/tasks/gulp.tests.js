@@ -10,7 +10,6 @@ const runSequence = require('run-sequence');
 const mergeStream = require('merge-stream');
 const babel = require('gulp-babel');
 
-
 //
 // Variables
 //
@@ -18,7 +17,7 @@ const appSrc = [
   'src/**/*!(.spec).js',
   '!src/**/*.spec.js',
   '!src/logger.js',
-  '!src/db.js',
+  '!src/db.js'
 ];
 const unitTestSrc = 'src/**/*.spec.js';
 const apiTestSrc = 'tests/api/**/*.js';
@@ -28,28 +27,30 @@ const coverageDone$ = () => {
   gutil.log('');
   gutil.log(gutil.colors.yellow('To see more Test Coverage details, run:'));
   gutil.log(gutil.colors.cyan(`open tests/coverage/lcov-report/index.html \n`));
+
   process.exit(0);
 };
+
 const coverageError$ = (err) => {
   gutil.log(gutil.colors.red('Error running code coverage: '), err);
+
   process.exit(1);
 };
-
 
 //
 // Tasks
 //
 
-
 // Jasmine UnitTest's
 gulp.task('jasmine:unit', () => gulp
   .src([unitTestSrc])
   .pipe(jasmine({
-    verbose           : true,
-    includeStackTrace : true,
+    verbose: true,
+    includeStackTrace: true
   }))
   .on('error', (err) => {
     gutil.log(gutil.colors.red('Error running UnitTest\'s: '), err);
+
     process.exit(1);
   })
 );
@@ -59,11 +60,12 @@ gulp.task('jasmine:unit', () => gulp
 gulp.task('jasmine:api', () => gulp
   .src([apiTestSrc])
   .pipe(jasmine({
-    verbose           : true,
-    includeStackTrace : true,
+    verbose: true,
+    includeStackTrace: true
   }))
   .on('error', (err) => {
     gutil.log(gutil.colors.red('Error running API Tests: '), err);
+
     process.exit(1);
   })
 );
@@ -78,8 +80,8 @@ gulp.task('test:coverage', () => mergeStream(
   .on('finish', () => gulp
     .src([unitTestSrc])
     .pipe(jasmine())
-    .pipe(istanbul.writeReports({ dir : coverageSrc, reportOpts : { dir : coverageSrc } }))
-    .pipe(istanbul.enforceThresholds({ thresholds : { global : 90 } }))
+    .pipe(istanbul.writeReports({ dir: coverageSrc, reportOpts: { dir: coverageSrc } }))
+    .pipe(istanbul.enforceThresholds({ thresholds: { global: 90 } }))
 
     .on('finish', () => {
       // Only run codecov.io inside of a CI environment

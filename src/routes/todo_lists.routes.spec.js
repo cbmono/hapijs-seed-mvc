@@ -1,7 +1,6 @@
 import { assertRoutes } from '../../tests/helpers';
 import * as routes from './todo_lists.routes';
 
-
 //
 // Tests
 //

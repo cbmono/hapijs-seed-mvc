@@ -1,6 +1,5 @@
 import { BaseRoutes } from './base.routes';
 
-
 //
 // Tests
 //
@@ -9,12 +8,14 @@ describe('Routes: Base', () => {
   let ExtendedRoutes;
   const endpoint = 'my-endpoint';
   const controller = new class MockedController {
+    /* eslint-disable */
     index() {}
     view() {}
     create() {}
     update() {}
     remove() {}
-  };
+    /* eslint-enable */
+  }();
 
   beforeEach(() => {
     ExtendedRoutes = class ext extends BaseRoutes {};
@@ -45,7 +46,7 @@ describe('Routes: Base', () => {
 
   it('should throw on empty controller handler', () => {
     try {
-      const emptyCtrl = new class TempController {};
+      const emptyCtrl = new class TempController {}();
 
       routes = new ExtendedRoutes(emptyCtrl);
       routes.index();

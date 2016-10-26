@@ -1,7 +1,6 @@
 import { ToDosController } from '../controllers/todos.controller';
 import { BaseRoutes } from './base.routes';
 
-
 //
 // ToDo's routes
 //
@@ -12,6 +11,8 @@ const routes = new class TodosRoutes extends BaseRoutes {
    */
   constructor() {
     const endpointName = '/todos';
+
+    /* istanbul ignore next */
     super(new ToDosController(), endpointName);
   }
 
@@ -21,7 +22,7 @@ const routes = new class TodosRoutes extends BaseRoutes {
    * @return {object}
    */
   create() {
-    // Get route settings from parent
+    /* istanbul ignore next */
     const route = super.create();
 
     // Update end-point description (used in Documentation)
@@ -29,11 +30,11 @@ const routes = new class TodosRoutes extends BaseRoutes {
 
     // Add validations for POST payload
     route.config.validate.payload = {
-      todo_list_id : this.joi.number().integer().required()
+      todo_list_id: this.joi.number().integer().required()
         .description('Reference to ToDo list'),
 
-      name : this.joi.string().required()
-        .description('ToDo name'),
+      name: this.joi.string().required()
+        .description('ToDo name')
     };
 
     return route;
@@ -45,7 +46,7 @@ const routes = new class TodosRoutes extends BaseRoutes {
    * @return {object}
    */
   update() {
-    // Get route settings from parent
+    /* istanbul ignore next */
     const route = super.update();
 
     // Update end-point description (used in Documentation)
@@ -53,13 +54,13 @@ const routes = new class TodosRoutes extends BaseRoutes {
 
     // Add validations for POST payload
     route.config.validate.payload = {
-      name : this.joi.string().required()
-        .description('ToDo name'),
+      name: this.joi.string().required()
+        .description('ToDo name')
     };
 
     return route;
   }
-};
+}();
 
 //
 // Export public end-points
@@ -69,5 +70,5 @@ export default [
   routes.view(),
   routes.create(),
   routes.update(),
-  routes.remove(),
+  routes.remove()
 ];

@@ -1,7 +1,7 @@
-import config from 'config';
 import _ from 'lodash';
-import testUtil from '../testUtility';
+import config from 'config';
 import fetch from 'node-fetch' ;
+import testUtil from '../testUtility';
 
 
 //
@@ -16,6 +16,7 @@ describe('API Test: ToDo\'s', () => {
 
   let todoListId;
   let createdId;
+
   const createdData = { name : 'New ToDo' };
   const updatedData = { name : 'Updated ToDo name' };
 
@@ -26,9 +27,10 @@ describe('API Test: ToDo\'s', () => {
     it('should start by creating a new ToDo List', async done => {
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todo-lists`, {
-          method : 'POST',
-          body   : JSON.stringify({ name : 'Temp ToDo List' }),
+          method: 'POST',
+          body: JSON.stringify({ name : 'Temp ToDo List' })
         });
+
         const body = await response.json();
 
         todoListId = body[0].id;
@@ -41,9 +43,10 @@ describe('API Test: ToDo\'s', () => {
     it('should create a new ToDo', async done => {
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todos`, {
-          method : 'POST',
-          body   : JSON.stringify(createdData),
+          method: 'POST',
+          body: JSON.stringify(createdData)
         });
+
         const body = await response.json();
 
         expect(response.status).toBe(200);
@@ -61,8 +64,9 @@ describe('API Test: ToDo\'s', () => {
     it('should return status code 400', async done => {
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todos`, {
-          method : 'POST',
+          method: 'POST'
         });
+
         expect(response.status).toBe(400);
       }, done);
     });
@@ -72,10 +76,12 @@ describe('API Test: ToDo\'s', () => {
     it('should update an existing ToDo', async done => {
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todos/${createdId}`, {
-          method : 'PUT',
-          body   : JSON.stringify(updatedData),
+          method: 'PUT',
+          body: JSON.stringify(updatedData)
         });
+
         const body = await response.json();
+
         expect(response.status).toBe(200);
         expect(body.length).toBe(1);
         expect(body[0].id).toBe(createdId);
@@ -89,8 +95,9 @@ describe('API Test: ToDo\'s', () => {
     it('should return status code 400', async done => {
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todos/${createdId}`, {
-          method : 'PUT',
+          method: 'PUT',
         });
+
         expect(response.status).toBe(400);
       }, done);
     });
@@ -98,9 +105,10 @@ describe('API Test: ToDo\'s', () => {
     it('should return status code 404', async done => {
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todos/-1`, {
-          method : 'PUT',
-          body   : JSON.stringify(updatedData),
+          method: 'PUT',
+          body: JSON.stringify(updatedData)
         });
+
         expect(response.status).toBe(404);
       }, done);
     });
@@ -110,8 +118,9 @@ describe('API Test: ToDo\'s', () => {
     it('should retrieve one ToDo', async done => {
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todos/${createdId}`, {
-          method : 'GET',
+          method: 'GET'
         });
+
         const body = await response.json();
 
         expect(response.status).toBe(200);
@@ -126,7 +135,7 @@ describe('API Test: ToDo\'s', () => {
     it('should return status code 404', async done => {
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todos/-1`, {
-          method : 'GET',
+          method: 'GET'
         });
 
         expect(response.status).toBe(404);
@@ -138,8 +147,9 @@ describe('API Test: ToDo\'s', () => {
     it('should retrieve all ToDo\'s', async done => {
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todos`, {
-          method : 'GET',
+          method: 'GET'
         });
+
         const body = await response.json();
         const createdEntry = _.find(body, { id : createdId });
 
@@ -157,9 +167,11 @@ describe('API Test: ToDo\'s', () => {
     it('should delete one ToDo', async done => {
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todos/${createdId}`, {
-          method : 'DELETE',
+          method: 'DELETE'
         });
+
         const body = await response.json();
+
         expect(response.status).toBe(200);
         expect(body).toBe(1);
       }, done);
@@ -168,8 +180,9 @@ describe('API Test: ToDo\'s', () => {
     it('should return status code 404', async done => {
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todos/-1`, {
-          method : 'DELETE',
+          method: 'DELETE'
         });
+
         expect(response.status).toBe(404);
       }, done);
     });
@@ -179,8 +192,9 @@ describe('API Test: ToDo\'s', () => {
     it('should end by deleting the created ToDo List', async done => {
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/todo-lists/${todoListId}`, {
-          method : 'DELETE',
+          method: 'DELETE'
         });
+        
         expect(response.status).toBe(200);
       }, done);
     });

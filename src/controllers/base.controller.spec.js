@@ -1,13 +1,12 @@
 import { BaseController } from './base.controller';
 
-
 //
 // Tests
 //
 describe('Controller: Base', () => {
   let controller;
   const notFoundMsg = 'Not Found';
-  const foo = { reply : (res) => {} };
+  const foo = { reply: (res) => {} };
 
   beforeEach(() => {
     controller = new class _base extends BaseController {}(notFoundMsg);
@@ -28,14 +27,14 @@ describe('Controller: Base', () => {
   });
 
   it('should have empty @notFoundMsg', () => {
-    const ctrl = new class _base extends BaseController {};
+    const ctrl = new class _base extends BaseController {}();
 
     expect(ctrl.notFoundMsg).toBe('');
   });
 
   describe('handleRequest()', () => {
-    it('should accept an array as response', async done => {
-      const response = [{ msg : 'hello' }];
+    it('should accept an array as response', async (done) => {
+      const response = [{ msg: 'hello' }];
       const func = () => Promise.resolve(response);
 
       await controller.handleRequest(func(), foo.reply);
@@ -43,7 +42,7 @@ describe('Controller: Base', () => {
       done();
     });
 
-    it('should accept a positive integer as response', async done => {
+    it('should accept a positive integer as response', async (done) => {
       const response = 1;
       const func = () => Promise.resolve(response);
 
@@ -52,7 +51,7 @@ describe('Controller: Base', () => {
       done();
     });
 
-    it('should return Not Found', async done => {
+    it('should return Not Found', async (done) => {
       const response = 'invalid response';
       const func = () => Promise.resolve(response);
 

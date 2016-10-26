@@ -23,7 +23,7 @@ gulp.task('db:migrate', () => {
   const knex = Knex(knexConfig);
 
   knex.migrate.latest({
-    directory : migrationSrc,
+    directory: migrationSrc,
   })
   .then((response) => {
     if (response[1].length) {
@@ -50,7 +50,7 @@ gulp.task('db:rollback', () => {
   const knex = Knex(knexConfig);
 
   knex.migrate.rollback({
-    directory : migrationSrc,
+    directory: migrationSrc,
   })
   .then((response) => {
     if (response[1].length) {
@@ -77,7 +77,7 @@ gulp.task('db:seed', () => {
   const knex = Knex(knexConfig);
 
   knex.seed.run({
-    directory : seedSrc,
+    directory: seedSrc,
   })
   .then((response) => {
     if (response[0].length) {

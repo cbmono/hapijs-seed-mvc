@@ -3,8 +3,7 @@ import fs from 'fs';
 import config from 'config';
 import Hapi from 'hapi';
 import path from 'path';
-import { default as pluginsConfig } from '../config/hapijs.plugins';
-import { default as log } from './logger';
+import { default as log } from '../libs/logger';
 
 
 //
@@ -20,43 +19,42 @@ global.log = log;    // Used instead of console()
 const server = new Hapi.Server();
 server.connection(config.get('server'));
 
-
-/**
- * registerRoute - Register Routes to the server
- *
- * @param { Object } file
- *
- */
-const registerRoute = file => {
-  const routes = require(`./routes/${file}`).default;
-  routes.forEach(route => server.route(route));
-};
-
 //
-// Register Hapi plugin's
+// Load & Register Hapi Plugins
 //
-server.register(pluginsConfig,
+const pluginsPath = path.join(__dirname, '../libs/plugins');
 
-  err => {
-    if (err) throw err;
+fs.readdirSync(pluginsPath).forEach((pluginFile) => {
+  // Only require JS files
+  if (/.*\.js$/.test(pluginFile)) {
+    const plugin = require('../libs/plugins/' + pluginFile).default();
 
-    // Load routes from ./routes
-    const routesNormalizedPath = path.join(__dirname, 'routes');
-
-    fs.readdirSync(routesNormalizedPath)
-      .filter(file => !file.includes('.spec') && file !== 'base.routes.js')
-      .forEach(registerRoute);
-
-    //
-    // Start the server
-    //
-    server.start(serverErr => {
-      if (serverErr) throw serverErr;
-
-      log.info({
-        'Server running at' : server.info.uri,
-        'NODE_ENV'          : process.env.NODE_ENV,
-      });
-    });
+    plugin.register(server);
   }
-);
+});
+
+//
+// Load Hapi routes
+//
+const routesPath = path.join(__dirname, 'routes');
+
+fs.readdirSync(routesPath).forEach((file) => {
+  // Ignore base.routes and .spec files
+  if (file !== 'base.routes.js' && file.indexOf('.spec.') === -1) {
+    const routes = require('./routes/' + file).default;
+
+    routes.forEach(route => server.route(route));
+  }
+});
+
+//
+// Start the server
+//
+server.start((err) => {
+  if (err) throw err;
+
+  log.info({
+    'Server running at': server.info.uri,
+    'NODE_ENV': process.env.NODE_ENV
+  });
+});

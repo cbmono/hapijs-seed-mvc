@@ -1,6 +1,5 @@
 import { ToDoListsController } from './todo_lists.controller';
 
-
 //
 // Tests
 //
@@ -30,7 +29,7 @@ describe('Controller: ToDo Lists', () => {
 
   it('should expose view()', () => {
     const id = 1;
-    const request = { params : { id } };
+    const request = { params: { id } };
 
     controller.view(request);
     expect(controller.ToDoList.findById).toHaveBeenCalledWith(id);
@@ -38,14 +37,14 @@ describe('Controller: ToDo Lists', () => {
 
   it('should expose viewAll()', () => {
     const id = 1;
-    const request = { params : { id } };
+    const request = { params: { id } };
 
     controller.viewAll(request);
     expect(controller.ToDoList.findByIdWithToDos).toHaveBeenCalledWith(id);
   });
 
   it('should expose create()', () => {
-    const payload = { name : 'New ToDo List' };
+    const payload = { name: 'New ToDo List' };
     const request = { payload };
 
     controller.create(request);
@@ -54,9 +53,9 @@ describe('Controller: ToDo Lists', () => {
 
   it('should expose update()', () => {
     const id = 1;
-    const payload = { name : 'Updated ToDo List' };
+    const payload = { name: 'Updated ToDo List' };
     const request = {
-      params : { id },
+      params: { id },
       payload,
     };
 
@@ -66,7 +65,7 @@ describe('Controller: ToDo Lists', () => {
 
   it('should expose remove()', () => {
     const id = 1;
-    const request = { params : { id } };
+    const request = { params: { id } };
 
     controller.remove(request);
     expect(controller.ToDoList.del).toHaveBeenCalledWith(id);

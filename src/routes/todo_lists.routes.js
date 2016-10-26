@@ -11,6 +11,8 @@ const routes = new class TodoListsRoutes extends BaseRoutes {
    */
   constructor() {
     const endpointName = '/todo-lists';
+
+    /* istanbul ignore next */
     super(new ToDoListsController(), endpointName);
   }
 
@@ -20,7 +22,7 @@ const routes = new class TodoListsRoutes extends BaseRoutes {
    * @return {object}
    */
   viewAll() {
-    // Re-use default view()
+    /* istanbul ignore next */
     const route = super.view();
 
     // Overwrite attributes
@@ -37,7 +39,7 @@ const routes = new class TodoListsRoutes extends BaseRoutes {
    * @return {object}
    */
   create() {
-    // Get route settings from parent
+    /* istanbul ignore next */
     const route = super.create();
 
     // Update end-point description (used in Documentation)
@@ -45,7 +47,7 @@ const routes = new class TodoListsRoutes extends BaseRoutes {
 
     // Add validations for POST payload
     route.config.validate.payload = {
-      name : this.joi.string().required().description('ToDo list name'),
+      name: this.joi.string().required().description('ToDo list name')
     };
 
     return route;
@@ -57,7 +59,7 @@ const routes = new class TodoListsRoutes extends BaseRoutes {
    * @return {object}
    */
   update() {
-    // Get route settings from parent
+    /* istanbul ignore next */
     const route = super.update();
 
     // Update end-point description (used in Documentation)
@@ -65,12 +67,12 @@ const routes = new class TodoListsRoutes extends BaseRoutes {
 
     // Add validations for POST payload
     route.config.validate.payload = {
-      name : this.joi.string().description('ToDo list name'),
+      name: this.joi.string().description('ToDo list name')
     };
 
     return route;
   }
-};
+}();
 
 //
 // Export public end-points
@@ -81,5 +83,5 @@ export default [
   routes.viewAll(),
   routes.create(),
   routes.update(),
-  routes.remove(),
+  routes.remove()
 ];

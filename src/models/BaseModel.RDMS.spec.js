@@ -1,6 +1,5 @@
 import { BaseModelRDMS } from './BaseModel.RDMS';
 
-
 //
 // Tests
 //
@@ -47,8 +46,8 @@ describe('Model: BaseModelRDMS', () => {
 
     beforeEach(() => {
       knexRes = (spyOn(model, 'Knex').and.returnValue(({
-        where   : () => {},
-        whereIn : () => {},
+        where: () => {},
+        whereIn: () => {},
       })))();
 
       spyOn(knexRes, 'where').and.returnValue(Promise.resolve({}));
@@ -87,12 +86,13 @@ describe('Model: BaseModelRDMS', () => {
   describe('save/update methods', () => {
     const name = 'Some cool name';
     const data = { name };
+
     let knexRes;
     let insertRes;
     let updateRes;
 
     beforeEach(() => {
-      spyOn(model, 'dbConfig').and.returnValue({ client : 'pg' });
+      spyOn(model, 'dbConfig').and.returnValue({ client: 'pg' });
       spyOn(model, 'now').and.returnValue('NOW()');
       spyOn(model, 'findById').and.returnValue(Promise.resolve({}));
 
@@ -100,14 +100,14 @@ describe('Model: BaseModelRDMS', () => {
       /* eslint no-unused-labels: 0*/
       /* eslint no-labels: 0*/
       knexRes = (spyOn(model, 'Knex').and.returnValue(({
-        insert : () => { returning : () => {}; },
-        update : () => { whereIn: () => {}; },
+        insert: () => { returning: () => {}; },
+        update: () => { whereIn: () => {}; }
       })))();
 
-      insertRes = (spyOn(knexRes, 'insert').and.returnValue({ returning : () => {} }))();
+      insertRes = (spyOn(knexRes, 'insert').and.returnValue({ returning: () => {} }))();
       spyOn(insertRes, 'returning').and.returnValue(Promise.resolve({}));
 
-      updateRes = (spyOn(knexRes, 'update').and.returnValue({ whereIn : () => {} }))();
+      updateRes = (spyOn(knexRes, 'update').and.returnValue({ whereIn: () => {} }))();
       spyOn(updateRes, 'whereIn').and.returnValue(Promise.resolve({}));
     });
 
@@ -119,8 +119,8 @@ describe('Model: BaseModelRDMS', () => {
         expect(model.Knex).toHaveBeenCalledWith(model.tableName);
         expect(knexRes.insert).toHaveBeenCalledWith({
           name,
-          created_at : 'NOW()',
-          updated_at : 'NOW()',
+          created_at: 'NOW()',
+          updated_at: 'NOW()',
         });
       });
 
@@ -156,10 +156,11 @@ describe('Model: BaseModelRDMS', () => {
           expect(model.Knex).toHaveBeenCalledWith(model.tableName);
           expect(knexRes.update).toHaveBeenCalledWith({
             name,
-            updated_at : 'NOW()',
+            updated_at: 'NOW()',
           });
           expect(updateRes.whereIn).toHaveBeenCalledWith('id', id);
           expect(model.findById).toHaveBeenCalledWith(id);
+
           done();
         });
       });
@@ -180,10 +181,10 @@ describe('Model: BaseModelRDMS', () => {
 
     beforeEach(() => {
       knexRes = (spyOn(model, 'Knex').and.returnValue(({
-        del : () => {},
+        del: () => {},
       })))();
 
-      deleteRes = (spyOn(knexRes, 'del').and.returnValue({ whereIn : () => {} }))();
+      deleteRes = (spyOn(knexRes, 'del').and.returnValue({ whereIn: () => {} }))();
       spyOn(deleteRes, 'whereIn').and.returnValue(Promise.resolve({}));
     });
 
@@ -205,7 +206,7 @@ describe('Model: BaseModelRDMS', () => {
 
   describe('other internal methods', () => {
     beforeEach(() => {
-      spyOn(model, 'dbConfig').and.returnValue({ client : 'pg' });
+      spyOn(model, 'dbConfig').and.returnValue({ client: 'pg' });
       spyOn(model.Knex, 'raw').and.callThrough();
     });
 

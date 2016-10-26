@@ -1,6 +1,5 @@
 import Boom from 'boom';
 
-
 /** ****************************************
  *
  * Define a basic skeleton for all custom controllers.

@@ -1,6 +1,5 @@
 import { Main } from '../models/Main';
 
-
 //
 // Controller for 'main'
 //

@@ -1,6 +1,5 @@
 import { ToDoList } from './ToDoList';
 
-
 //
 // Tests
 //
@@ -33,6 +32,7 @@ describe('Model: ToDoList', () => {
       model.findByIdWithToDos(id).then(() => {
         expect(model.findById).toHaveBeenCalledWith(id);
         expect(model.ToDo.findBy).toHaveBeenCalledWith('todo_list_id', id);
+
         done();
       });
     });
@@ -46,6 +46,7 @@ describe('Model: ToDoList', () => {
         expect(model.ToDo.findBy).not.toHaveBeenCalled();
         expect(response.length).toBe(0);
         expect(typeof response).toBe('object');
+
         done();
       });
     });

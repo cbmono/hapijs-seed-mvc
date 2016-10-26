@@ -12,6 +12,7 @@ export class ToDoListsController extends BaseController {
   constructor() {
     const notFoundMsg = 'ToDo List not found';
 
+    /* istanbul ignore next */
     super(notFoundMsg);
     this.ToDoList = new ToDoList();
   }
@@ -26,21 +27,21 @@ export class ToDoListsController extends BaseController {
   /**
    * Retrieve a single ToDo list
    */
-  view({ params : { id } }, reply) {
+  view({ params: { id } }, reply) {
     this.handleRequest(this.ToDoList.findById(id), reply);
   }
 
   /**
    * Retrieve a single ToDo list and all its ToDo's
    */
-  viewAll({ params : { id } }, reply) {
+  viewAll({ params: { id } }, reply) {
     this.handleRequest(this.ToDoList.findByIdWithToDos(id), reply);
   }
 
   /**
    * Create a new ToDo list
    */
-  create({ payload : data }, reply) {
+  create({ payload: data }, reply) {
     this.handleRequest(this.ToDoList.save(data), reply);
   }
 
@@ -57,7 +58,7 @@ export class ToDoListsController extends BaseController {
   /**
    * Delete a ToDo list
    */
-  remove({ params : { id } }, reply) {
+  remove({ params: { id } }, reply) {
     this.handleRequest(this.ToDoList.del(id), reply);
   }
 }

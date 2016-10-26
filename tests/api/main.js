@@ -1,6 +1,6 @@
 import config from 'config';
-import testUtil from '../testUtility';
 import fetch from 'node-fetch' ;
+import testUtil from '../testUtility';
 
 //
 // Tests
@@ -8,12 +8,12 @@ import fetch from 'node-fetch' ;
 describe('API Test: Main', () => {
 
   describe('GET /healthcheck', () => {
-
     it('should return the server status', async done => {
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/healthcheck`, {
-          method : 'GET',
+          method : 'GET'
         });
+
         const body = await response.json();
 
         expect(response.ok).toBe(true);
@@ -27,14 +27,13 @@ describe('API Test: Main', () => {
 
   describe('GET /{param*}', () => {
     it('should return index.html from ./public', async done => {
-
       await testUtil(async () => {
         const response = await fetch(`${config.apiUrl}/index.html`, {
           method : 'GET',
         });
+
         expect(response.status).toBe(200);
       }, done);
-
     });
   });
 });

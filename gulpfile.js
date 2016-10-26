@@ -11,13 +11,13 @@ const gulp = require('gulp');
 //
 // Variables
 //
-const gulpTasksSrc = './tasks/**/gulp.*.js';
+const gulpTasksSrc = './libs/tasks/**/gulp.*.js';
 
 //
 // Load Gulp Tasks
 //
 glob.sync(gulpTasksSrc)
-  .forEach((file) => require(path.resolve(file)));
+  .forEach(file => require(path.resolve(file)));
 
 //
 // Default (gulp) task
@@ -25,7 +25,8 @@ glob.sync(gulpTasksSrc)
 //  * Lint Javascript files
 //  * Run local node server
 //  * Resatart on file changes
+//
 gulp.task('default', [
   'lint',
-  'nodemon',
+  'nodemon'
 ]);

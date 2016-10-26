@@ -4,13 +4,17 @@ machine:
   environment:
     NODE_ENV: ci-circle
 
+dependencies:
+  pre:
+    - npm install -g npm
+    - npm install
+
 test:
-  override:
-    - npm install -g babel-cli
+  pre:
     - npm run db:migrate
     - npm run db:seed
-    - npm start:
+    - npm run build:
         background: true
-    - sleep 30
-    - curl --retry 10 --retry-delay 5 -v 127.0.0.1:3000/healthcheck
+  override:
+    - wget --retry-connrefused --no-check-certificate -T 60 http://127.0.0.1:3000/healthcheck -O /dev/null 2>&1
     - npm test

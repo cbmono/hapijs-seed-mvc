@@ -1,6 +1,5 @@
 import * as joi from 'joi';
 
-
 const validateControllerHandler = Symbol('validateControllerHandler');
 
 /** ****************************************
@@ -54,13 +53,13 @@ export class BaseRoutes {
     this[validateControllerHandler]('index');
 
     return {
-      method  : 'GET',
-      path    : this.endpoint,
-      handler : this.controller.index.bind(this.controller),
-      config  : {
-        description : 'List all entries',
-        tags        : ['public'],
-      },
+      method: 'GET',
+      path: this.endpoint,
+      handler: this.controller.index.bind(this.controller),
+      config: {
+        description: 'List all entries',
+        tags: ['public']
+      }
     };
   }
 
@@ -73,18 +72,18 @@ export class BaseRoutes {
     this[validateControllerHandler]('view');
 
     return {
-      method  : 'GET',
-      path    : `${this.endpoint}/{id}`,
-      handler : this.controller.view.bind(this.controller),
-      config  : {
-        description : 'Get an entry by ID',
-        tags        : ['public'],
-        validate    : {
-          params : {
-            id : this.joi.number().integer().required().description('ID, primary key'),
-          },
-        },
-      },
+      method: 'GET',
+      path: `${this.endpoint}/{id}`,
+      handler: this.controller.view.bind(this.controller),
+      config: {
+        description: 'Get an entry by ID',
+        tags: ['public'],
+        validate: {
+          params: {
+            id: this.joi.number().integer().required().description('ID, primary key')
+          }
+        }
+      }
     };
   }
 
@@ -97,16 +96,16 @@ export class BaseRoutes {
     this[validateControllerHandler]('create');
 
     return {
-      method  : 'POST',
-      path    : this.endpoint,
-      handler : this.controller.create.bind(this.controller),
-      config  : {
-        description : 'Add a new entry',
-        tags        : ['public'],
-        validate    : {
+      method: 'POST',
+      path: this.endpoint,
+      handler: this.controller.create.bind(this.controller),
+      config: {
+        description: 'Add a new entry',
+        tags: ['public'],
+        validate: {
           // Extend (or overwrite) in your own implementation
-        },
-      },
+        }
+      }
     };
   }
 
@@ -119,20 +118,20 @@ export class BaseRoutes {
     this[validateControllerHandler]('update');
 
     return {
-      method  : 'PUT',
-      path    : `${this.endpoint}/{id}`,
-      handler : this.controller.update.bind(this.controller),
-      config  : {
-        description : 'Update an existing entry',
-        tags        : ['public'],
-        validate    : {
+      method: 'PUT',
+      path: `${this.endpoint}/{id}`,
+      handler: this.controller.update.bind(this.controller),
+      config: {
+        description: 'Update an existing entry',
+        tags: ['public'],
+        validate: {
           // Extend (or overwrite) in your own implementation
 
-          params : {
-            id : this.joi.number().integer().required().description('ID, primary key'),
-          },
-        },
-      },
+          params: {
+            id: this.joi.number().integer().required().description('ID, primary key')
+          }
+        }
+      }
     };
   }
 
@@ -145,18 +144,18 @@ export class BaseRoutes {
     this[validateControllerHandler]('remove');
 
     return {
-      method  : 'DELETE',
-      path    : `${this.endpoint}/{id}`,
-      handler : this.controller.remove.bind(this.controller),
-      config  : {
-        description : 'Delete an entry',
-        tags        : ['public'],
-        validate    : {
-          params : {
-            id : this.joi.number().integer().required().description('ID, primary key'),
-          },
-        },
-      },
+      method: 'DELETE',
+      path: `${this.endpoint}/{id}`,
+      handler: this.controller.remove.bind(this.controller),
+      config: {
+        description: 'Delete an entry',
+        tags: ['public'],
+        validate: {
+          params: {
+            id: this.joi.number().integer().required().description('ID, primary key')
+          }
+        }
+      }
     };
   }
 
@@ -167,7 +166,6 @@ export class BaseRoutes {
    * @throw {Error}
    *        In case controller handler is not a Function
    */
-
   [validateControllerHandler](handler) {
     if (typeof this.controller[handler] !== 'function') {
       throw new Error('BaseRoute: controller handler is undefined');

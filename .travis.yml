@@ -1,8 +1,7 @@
 language: node_js
 node_js:
-  - "node" # latest stable
-  - "5"
   - "6"
+  - "5"
 
 addons:
   postgresql: "9.4"
@@ -15,7 +14,7 @@ before_script:
   - "export NODE_ENV=ci-travis"
   - npm run db:migrate
   - npm run db:seed
-  - npm start &
-  - sleep 10
+  - npm run build &
+  - wget --retry-connrefused --no-check-certificate -T 60 http://127.0.0.1:3000/healthcheck -O /dev/null 2>&1
 
 script: npm test
