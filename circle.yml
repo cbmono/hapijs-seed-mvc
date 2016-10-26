@@ -6,7 +6,6 @@ machine:
 
 dependencies:
   pre:
-    - npm install -g npm
     - npm install
 
 test:
