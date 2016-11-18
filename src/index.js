@@ -3,7 +3,7 @@ import fs from 'fs';
 import config from 'config';
 import Hapi from 'hapi';
 import path from 'path';
-import { default as log } from '../libs/logger';
+import log from '../libs/logger';
 
 
 //
