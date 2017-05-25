@@ -26,7 +26,7 @@
     "babel-preset-es2015": "^6.16.0",
     "babel-register": "*",
     "blipp": "^2.3.0",
-    "boom": "^4.2.0",
+    "boom": "^5.0.0",
     "config": "^1.21.0",
     "glob": "*",
     "good": "^7.0.2",
